@@ -28,7 +28,7 @@ class APICaller_Show{
                 return
             }
             do{
-                let results = try JSONDecoder().decode(ShowsResponse.self, from: data)
+                let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
                 print(results)
                 completion(.success(results.results))
                 

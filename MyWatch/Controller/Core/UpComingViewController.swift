@@ -1,6 +1,6 @@
 //
 //  Up_ComingViewController.swift
-//  GamesStore_UIKit
+//  MyWatch
 //
 //  Created by Amir Malamud on 10/11/2022.
 //

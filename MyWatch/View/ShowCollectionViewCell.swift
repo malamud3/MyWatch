@@ -1,6 +1,6 @@
 //
 //  CollectionViewCell_Show.swift
-//  GameStore_UIkit
+//  MyWatch
 //
 //  Created by Amir Malamud on 05/12/2022.
 //

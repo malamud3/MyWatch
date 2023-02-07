@@ -24,7 +24,7 @@ class APICaller_TV{
                 return
             }
             do{
-                let results = try JSONDecoder().decode(ShowsResponse.self, from: data)
+                let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
                 print(results)
                 self.getTvShowData(with: results.results[0].id)
                 completion(.success(results.results))
@@ -45,7 +45,7 @@ class APICaller_TV{
                 return
             }
             do{
-                let results = try JSONDecoder().decode(ShowsResponse.self, from: data)
+                let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
 
                 completion(.success(results.results))
                 
@@ -66,7 +66,7 @@ class APICaller_TV{
                 return
             }
             do{
-                let results = try JSONDecoder().decode(ShowsResponse.self, from: data)
+                let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
                 completion(.success(results.results))
                 
             } catch{
@@ -87,7 +87,7 @@ class APICaller_TV{
                 return
             }
             do{
-                let results = try JSONDecoder().decode(ShowsResponse.self, from: data)
+                let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
                 
                 completion(.success(results.results))
                 
@@ -108,7 +108,7 @@ class APICaller_TV{
                 return
             }
             do{
-                let results = try JSONDecoder().decode(ShowsResponse.self, from: data)
+                let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
                 completion(.success(results.results))
 
             } catch{
