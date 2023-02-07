@@ -1,6 +1,6 @@
 //
 //  YoutubeSearchResponse.swift
-//  GameStore_UIkit
+//  MyWatch
 //
 //  Created by Amir Malamud on 13/12/2022.
 //

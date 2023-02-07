@@ -101,18 +101,13 @@ class HeaderUiView: UIView {
         NSLayoutConstraint.activate(addToListButtonConstraints)
     }
     
-    
-    
+
     public func configure(with model: showViewModel){
         guard let url = URL(string: "\(S.API_TV.imgURL)\(model.posterURL)") else { return}
            
         imageView_header.sd_setImage(with: url, completed: nil)
-            
-      
 
     }
-    
-    
     
     
     override func layoutSubviews() {
@@ -120,8 +115,5 @@ class HeaderUiView: UIView {
         containerView.frame = CGRect(x: 8, y: 8, width: self.bounds.width - 16, height: self.bounds.height - 16)
         imageView_header.frame = containerView.bounds
     }
-    
 
-
-    
 }

@@ -12,7 +12,7 @@ import UIKit
 
 class UpComingViewController: UIViewController {
     
-    private var shows:[Show] = [Show]()
+    private var shows:[Movie] = [Movie]()
 
     private let upcomingTable: UITableView = {
         

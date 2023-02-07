@@ -16,7 +16,7 @@ class APICaller_Movie{
     
     /* Movies */
     // @ GET: Trending(Most views in 24h) -> return [Show] || Error
-    func getTrendingMovies(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getTrendingMovies(completion: @escaping (Result<[Movie], Error>) -> Void){
         
         guard let url = URL(string: S.API_TV.Movies.getTrendingMovies) else {return}
         
@@ -37,7 +37,7 @@ class APICaller_Movie{
 
     /* Movies */
     //@ GET: Upcoming -> return [Show] || Error
-    func getUpcomingMovies(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getUpcomingMovies(completion: @escaping (Result<[Movie], Error>) -> Void){
         guard let url = URL(string: S.API_TV.Movies.getUpcomingMovies) else {return}
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
@@ -57,7 +57,7 @@ class APICaller_Movie{
     
     /* Movies */
     //@ GET: Popular -> return [Show] || Error
-    func getPopularMovies(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getPopularMovies(completion: @escaping (Result<[Movie], Error>) -> Void){
         guard let url = URL(string: S.API_TV.Movies.getPopularMovies) else {return}
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
@@ -76,7 +76,7 @@ class APICaller_Movie{
 
     /* Movies */
     //@ GET: TopRate -> return [Show] || Error
-    func getTopRatedMovies(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getTopRatedMovies(completion: @escaping (Result<[Movie], Error>) -> Void){
         guard let url = URL(string: S.API_TV.Movies.getTopRatedMovies) else {return}
 
         
@@ -98,7 +98,7 @@ class APICaller_Movie{
     /* Movies */
     // @ GET:
 
-    func getDiscoverMovies(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getDiscoverMovies(completion: @escaping (Result<[Movie], Error>) -> Void){
         guard let url = URL(string: S.API_TV.Movies.getDiscoverMovies) else {return}
 
         

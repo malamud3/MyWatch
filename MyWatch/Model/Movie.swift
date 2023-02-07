@@ -1,16 +1,15 @@
 //
 //  Show.swift
-//  GameStore_UIkit
+//  MyWatch
 //
 //  Created by Amir Malamud on 05/12/2022.
 //
 
 import Foundation
 
-struct Show: Codable {
+struct Movie: Codable {
     
     let id: Int
-    let media_type: String?
     let original_name: String?
     let original_title: String?
     let poster_path: String?
@@ -21,6 +20,6 @@ struct Show: Codable {
     
 }
 
-struct ShowsResponse: Codable {
-    let results: [Show]
+struct MoviesResponse: Codable {
+    let results: [Movie]
 }

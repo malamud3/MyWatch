@@ -11,7 +11,7 @@ import UIKit
 
 class SearchViewController: UIViewController  {
     
-    private var shows:[Show] = [Show]()
+    private var shows:[Movie] = [Movie]()
     
     private let discoverTable: UITableView = {
         let table = UITableView()

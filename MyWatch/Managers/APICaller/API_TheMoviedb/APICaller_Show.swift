@@ -17,7 +17,7 @@ class APICaller_Show{
     }
 
     /* Genaral*/
-    func doSearch(with query: String ,completion: @escaping (Result<[Show], Error>) -> Void){
+    func doSearch(with query: String ,completion: @escaping (Result<[Movie], Error>) -> Void){
         
         //Returns the character set for characters allowed in a user URL subcomponent.
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}

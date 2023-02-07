@@ -15,7 +15,7 @@ class APICaller_TV{
         case failledTogetData
     }
     
-    func getTrendingTVShows(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getTrendingTVShows(completion: @escaping (Result<[Movie], Error>) -> Void){
         
         guard let url = URL(string: S.API_TV.TVshows.getTrendingTvShows) else {return}
         
@@ -36,7 +36,7 @@ class APICaller_TV{
         task.resume()
     }
     
-    func getPopularTVShows(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getPopularTVShows(completion: @escaping (Result<[Movie], Error>) -> Void){
         
         guard let url = URL(string: S.API_TV.TVshows.getPopularTvShows) else {return}
         
@@ -57,7 +57,7 @@ class APICaller_TV{
     }
 
     
-    func getTopRatedTVShows(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getTopRatedTVShows(completion: @escaping (Result<[Movie], Error>) -> Void){
         
         guard let url = URL(string: S.API_TV.TVshows.getTrendingTvShows) else {return}
         
@@ -79,7 +79,7 @@ class APICaller_TV{
     
 
     
-    func getUpcomingTVShows(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getUpcomingTVShows(completion: @escaping (Result<[Movie], Error>) -> Void){
         
         guard let url = URL(string: S.API_TV.TVshows.getUpcomingTvShows) else {return}
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
@@ -99,7 +99,7 @@ class APICaller_TV{
     }
 
           
-    func getRecentlyAddedTvShows(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getRecentlyAddedTvShows(completion: @escaping (Result<[Movie], Error>) -> Void){
 
         guard let url = URL(string: S.API_TV.TVshows.getRecentlyAddedTvShows) else {return}
 

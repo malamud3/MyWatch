@@ -13,7 +13,7 @@ protocol CollectionViewTableViewCellDelegate: AnyObject {
 
 class CollectionTableViewCell: UITableViewCell {
 
-    private var shows: [Show] = [Show]()
+    private var shows: [Movie] = [Movie]()
 
     weak var deleagte : CollectionViewTableViewCellDelegate?
 
@@ -44,7 +44,7 @@ class CollectionTableViewCell: UITableViewCell {
         collectionView.frame = contentView.bounds
     }
     
-     public func congigure(with shows: [Show]){
+     public func congigure(with shows: [Movie]){
          self.shows = shows;
          DispatchQueue.main.async { [weak self] in
              self?.collectionView.reloadData()

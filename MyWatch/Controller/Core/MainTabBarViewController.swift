@@ -53,7 +53,7 @@ class MainTabBarViewController: UITabBarController {
         
         let image = UIImage(named: S.picName.Logo)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(handleLogin))
         //SFsymbols
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(image: UIImage(systemName: "person"), style:.done, target: self, action: #selector(handleLogin)),

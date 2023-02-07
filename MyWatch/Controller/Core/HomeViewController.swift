@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
     private var showMovies = false
     private let disposeBag = DisposeBag()
     
-    private var headerData : Show?
+    private var headerData : Movie?
     private var headerView : HeaderUiView?
     
     
@@ -80,7 +80,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     
-    private func getData(for whatData: whatData, completion: @escaping (Result<[Show ], Error>) -> Void) {
+    private func getData(for whatData: whatData, completion: @escaping (Result<[Movie ], Error>) -> Void) {
         let apiCaller: Any
         switch showMovies {
         case true:
