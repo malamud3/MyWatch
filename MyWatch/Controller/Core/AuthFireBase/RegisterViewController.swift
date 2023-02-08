@@ -7,7 +7,6 @@
 import UIKit
 import FirebaseAuth
 import RxSwift
-import RxCocoa
 
 
 class RegisterViewController: UIViewController {

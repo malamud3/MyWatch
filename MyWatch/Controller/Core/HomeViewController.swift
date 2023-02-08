@@ -7,7 +7,6 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
 
 
 /* Sections to fetchData */
@@ -24,7 +23,7 @@ class HomeViewController: UIViewController {
     private var showMovies = false
     private let disposeBag = DisposeBag()
     
-    private var headerData : Movie?
+    private var headerData : Show?
     private var headerView : HeaderUiView?
     
     
@@ -47,18 +46,25 @@ class HomeViewController: UIViewController {
         
         configureHeaderView ()
         
-        headerView = HeaderUiView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
+        headerView = HeaderUiView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeedTable.tableHeaderView = headerView
         
-
+        modifyUIMovieOrTvShow()
     }
     
-    
-    
+    // Update the view based on the new value of showMovies
+    private func modifyUIMovieOrTvShow (){
+        (self.tabBarController as? MainTabBarViewController)?.showMoviesSubject
+            .subscribe(onNext: { [weak self] showMovies in
+                self?.showMovies = showMovies
+                self?.homeFeedTable.reloadData()
+            })
+            .disposed(by: disposeBag)
+    }
     
     private func configureHeaderView () {
         
-        APICaller_Movie.shared.getTrendingMovies { [weak self] result in
+        APICaller_Movie.shared.getTrending { [weak self] result in
             switch result{
             case .success(let shows):
                 let selectedShow = shows.randomElement()
@@ -70,17 +76,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        homeFeedTable.frame = view.bounds
-    }
-}
-
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
-    
-    private func getData(for whatData: whatData, completion: @escaping (Result<[Movie ], Error>) -> Void) {
+    private func fetchData(for whatData: whatData, completion: @escaping (Result<[Show], Error>) -> Void) {
         let apiCaller: Any
         switch showMovies {
         case true:
@@ -91,20 +87,30 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         
         switch whatData {
         case .Trending:
-            (apiCaller as? APICaller_Movie)?.getTrendingMovies(completion: completion)
-            (apiCaller as? APICaller_TV)?.getTrendingTVShows(completion: completion)
+            (apiCaller as? APICaller_Movie)?.getTrending(completion: completion)
+            (apiCaller as? APICaller_TV)?.getTrending(completion: completion)
         case .Popular:
-            (apiCaller as? APICaller_Movie)?.getPopularMovies(completion: completion)
-            (apiCaller as? APICaller_TV)?.getPopularTVShows(completion: completion)
+            (apiCaller as? APICaller_Movie)?.getPopular(completion: completion)
+            (apiCaller as? APICaller_TV)?.getPopular(completion: completion)
         case .RecentlyAdded:
-            (apiCaller as? APICaller_Movie)?.getUpcomingMovies(completion: completion)
-            (apiCaller as? APICaller_TV)?.getRecentlyAddedTvShows(completion: completion)
+            (apiCaller as? APICaller_Movie)?.getUpcoming(completion: completion)
+            (apiCaller as? APICaller_TV)?.getRecentlyAdded(completion: completion)
         case .TopRated:
-            (apiCaller as? APICaller_Movie)?.getTopRatedMovies(completion: completion)
-            (apiCaller as? APICaller_TV)?.getTopRatedTVShows(completion: completion)
+            (apiCaller as? APICaller_Movie)?.getTopRated(completion: completion)
+            (apiCaller as? APICaller_TV)?.getTopRated(completion: completion)
             
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        homeFeedTable.frame = view.bounds
+    }
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
+    
+
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
@@ -123,7 +129,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell.deleagte = self
         
-        getData(for: whatData(rawValue: indexPath.section) ?? whatData.Popular) { result in
+        fetchData(for: whatData(rawValue: indexPath.section) ?? whatData.Popular) { result in
             switch result {
             case .success(let shows):
                 cell.congigure(with: shows)

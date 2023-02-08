@@ -16,7 +16,7 @@ protocol SearchResultsViewControllerDelegate: AnyObject {
 class SearchResultsViewController: UIViewController {
     
     //SearchViewController need acsses => Public
-    var shows:[Movie] = [Movie]()
+    var shows:[Show] = [Show]()
 
     public weak var delegate: SearchResultsViewControllerDelegate?
 

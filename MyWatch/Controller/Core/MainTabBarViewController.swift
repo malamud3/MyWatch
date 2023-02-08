@@ -7,8 +7,11 @@
 
 
 import UIKit
+import RxSwift
 
 class MainTabBarViewController: UITabBarController {
+
+    let showMoviesSubject = PublishSubject<Bool>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,27 +49,35 @@ class MainTabBarViewController: UITabBarController {
         tabBar.tintColor = .label
         
         setViewControllers([vc1, vc2, vc3, vc4], animated: true)
+        
     }
    // NAV -> Porfile, LOGO-> FirstPage
     
     private func configureNavbar(){
+        let profileMangerBtn =        UIBarButtonItem(image: UIImage(systemName: "person"), style:.done, target: self, action: #selector(handleLogin))
+        let  moviesBtn        =        UIBarButtonItem(title: "Movies", style: .plain, target: self, action: #selector(showMoviesAction))
+        let  tvShowsBtn       =        UIBarButtonItem(title: "TV Shows", style: .plain, target: self, action: #selector(showTVShowsAction))
+        let  logoBtn          =        UIBarButtonItem(image: UIImage(named: S.picName.Logo), style: .done, target: nil, action: nil)
         
-        let image = UIImage(named: S.picName.Logo)
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(handleLogin))
+        navigationItem.leftBarButtonItems = [
+            logoBtn,
+            moviesBtn,
+            tvShowsBtn
+               ]
         //SFsymbols
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(systemName: "person"), style:.done, target: self, action: #selector(handleLogin)),
-            UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style:.done, target: self, action: nil)
+            profileMangerBtn,
         ]
         
         navigationController?.navigationBar.tintColor = UIColor(named: "Color_Main")
     }
-    
-    
-    
-    
-    
+    @objc private func showMoviesAction() {
+        showMoviesSubject.onNext(true)
+      }
+
+      @objc private func showTVShowsAction() {
+          showMoviesSubject.onNext(false)
+      }
     
     @objc private func handleLogin() {
         let loginVC = LoginViewController()

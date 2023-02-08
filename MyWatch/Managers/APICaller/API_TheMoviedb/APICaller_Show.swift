@@ -8,16 +8,21 @@
 import Foundation
 
 
+enum APIError: Error{
+    case failledTogetData
+}
+protocol APICaller_Show{
 
-class APICaller_Show{
-    static let shared = APICaller_Show()
+    func getTrending(completion: @escaping (Result<[Show], Error>) -> Void)
+    func getPopular (completion:  @escaping  (Result<[Show], Error>) -> Void)
+    func getTopRated(completion: @escaping (Result<[Show], Error>) -> Void)
+    func getUpcoming(completion: @escaping (Result<[Show], Error>) -> Void)
+}
+
+extension APICaller_Show {
     
-    enum APIError: Error{
-        case failledTogetData
-    }
-
     /* Genaral*/
-    func doSearch(with query: String ,completion: @escaping (Result<[Movie], Error>) -> Void){
+    func doSearch(with query: String ,completion: @escaping (Result<[Show], Error>) -> Void){
         
         //Returns the character set for characters allowed in a user URL subcomponent.
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}

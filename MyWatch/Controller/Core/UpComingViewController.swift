@@ -6,14 +6,16 @@
 //
 
 import UIKit
-
+import RxSwift
 
 
 
 class UpComingViewController: UIViewController {
     
-    private var shows:[Movie] = [Movie]()
-
+    private var shows:[Show] = [Show]()
+    private var showMovies = false
+    private let disposeBag = DisposeBag()
+    
     private let upcomingTable: UITableView = {
         
         let table = UITableView()
@@ -33,15 +35,35 @@ class UpComingViewController: UIViewController {
             upcomingTable.delegate = self
             upcomingTable.dataSource = self
         
-        fetchUpcoming()
+        fetchData()
+        modifyUIMovieOrTvShow ()
+    }
+    
+    // Update the view based on the new value of showMovies
+    private func modifyUIMovieOrTvShow (){
+        (self.tabBarController as? MainTabBarViewController)?.showMoviesSubject
+            .subscribe(onNext: { [weak self] showMovies in
+                self?.showMovies = showMovies
+                self?.upcomingTable.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         upcomingTable.frame = view.bounds
     }
     
-    private func fetchUpcoming(){
-        APICaller_Movie.shared.getUpcomingMovies{[weak self] result in
+    private func fetchData(){
+        
+        let apiCaller: Any
+        switch showMovies {
+        case true:
+            apiCaller = APICaller_Movie.shared
+        case false:
+            apiCaller = APICaller_TV.shared
+        }
+        
+        APICaller_Movie.shared.getUpcoming{[weak self] result in
             switch result{
             case.success(let shows):
                 self?.shows = shows

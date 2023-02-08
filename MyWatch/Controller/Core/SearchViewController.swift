@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import RxSwift
 
 
 
 class SearchViewController: UIViewController  {
     
-    private var shows:[Movie] = [Movie]()
+    private var shows:[Show] = [Show]()
+    private var showMovies = false
+    private let disposeBag = DisposeBag()
     
     private let discoverTable: UITableView = {
         let table = UITableView()
@@ -44,11 +47,23 @@ class SearchViewController: UIViewController  {
         navigationItem.searchController = searchController
         
         
-        fetchDiscoverMovies ()
+        fetchData ()
         
         searchController.searchResultsUpdater = self
         
         
+        modifyUIMovieOrTvShow ()
+    }
+    
+    // Update the view based on the new value of showMovies
+    private func modifyUIMovieOrTvShow (){
+        (self.tabBarController as? MainTabBarViewController)?.showMoviesSubject
+            .subscribe(onNext: { [weak self] showMovies in
+                self?.showMovies = showMovies
+                self?.discoverTable.reloadData()
+                
+            })
+            .disposed(by: disposeBag)
     }
     
     override func viewDidLayoutSubviews() {
@@ -56,8 +71,8 @@ class SearchViewController: UIViewController  {
         discoverTable.frame = view.bounds
     }
     
-    private func fetchDiscoverMovies () {
-        APICaller_Movie.shared.getDiscoverMovies { [weak self] result in
+    private func fetchData () {
+        APICaller_Movie.shared.getDiscover { [weak self] result in
             switch result {
             case .success(let shows):
                 self?.shows =  shows
