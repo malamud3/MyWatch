@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APICaller_Movie: APICaller_Show{
+class APICaller_Movie{
     static let shared = APICaller_Movie()
     
     enum APIError: Error{

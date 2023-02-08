@@ -8,7 +8,7 @@
 import Foundation
 
 
-class APICaller_TV: APICaller_Show{
+class APICaller_TV{
     static let shared = APICaller_TV()
     
     enum APIError: Error{
