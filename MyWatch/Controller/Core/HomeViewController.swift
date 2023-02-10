@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
     
     var sectionTitles: [String] = [S.HomeView_sectionTitles.Trending,S.HomeView_sectionTitles.Popular,S.HomeView_sectionTitles.RecentlyAdded,S.HomeView_sectionTitles.Top_Rated]
     
-    private let homeFeedTable: UITableView = {
+    private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(CollectionTableViewCell.self, forCellReuseIdentifier: S.Identifier.CollectionViewTableViewCell)
         return table
@@ -40,22 +40,20 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black;
-        view.addSubview(homeFeedTable)
+        view.addSubview(tableView)
         
-        homeFeedTable.delegate = self
-        homeFeedTable.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
         configureHeaderView ()
-        
         headerView = HeaderUiView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
-        homeFeedTable.tableHeaderView = headerView
+        tableView.tableHeaderView = headerView
         
-        modifyUIMovieOrTvShow()
+        modifyUI()
     }
     
     // Update the view based on the new value of showMovies
-    private func modifyUIMovieOrTvShow (){
+    private func modifyUI (){
         (self.tabBarController as? MainTabBarViewController)?.showMoviesSubject
             .subscribe(onNext: { [weak self] showMovies in
                 if( self?.showMovies != showMovies){
@@ -81,7 +79,7 @@ class HomeViewController: UIViewController {
     
     private func updateUI(){
         configureHeaderView()
-        homeFeedTable.reloadData()
+        tableView.reloadData()
     }
     
     private func configureHeaderView () {
@@ -89,12 +87,11 @@ class HomeViewController: UIViewController {
         apiCaller.getTrending { [weak self] result in
             switch result{
             case .success(let shows):
-                let nullSafeShows = shows.filter { show in
-                    return show.poster_path != nil
-                }
-                let selectedShow = nullSafeShows.randomElement()
+                let filteredShows = shows.filter { $0.poster_path != nil }
+                let selectedShow = filteredShows.randomElement()
                 self?.headerData = selectedShow
                 self?.headerView?.configure(with: showViewModel(showName: selectedShow?.original_title ?? selectedShow?.original_name ?? "" , posterURL: selectedShow?.poster_path ?? "", dateRelece: ""))
+                
             case .failure(let erorr):
                 print(erorr.localizedDescription)
             }
@@ -119,7 +116,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        homeFeedTable.frame = view.bounds
+        tableView.frame = view.bounds
     }
 }
 

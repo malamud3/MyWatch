@@ -10,7 +10,7 @@ import RxSwift
 
 class SearchViewController: UIViewController  {
     
-    private var apiCaller  : APICaller_Show = APICaller_TV.shared
+    private var apiCaller  : APICaller_Show = APICaller_Movie.shared
 
     private var shows:[Show] = [Show]()
 

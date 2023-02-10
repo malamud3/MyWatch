@@ -53,8 +53,10 @@ class UpComingViewController: UIViewController {
                 switch self?.showMovies {
                 case true:
                     self?.apiCaller = APICaller_Movie.shared
+                    self?.myPage = 1
                 case false:
                     self?.apiCaller = APICaller_TV.shared
+                    self?.myPage = 1
                 case .none:
                     self?.apiCaller = APICaller_Movie.shared
                 case .some(_):
