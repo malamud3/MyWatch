@@ -7,7 +7,8 @@
 
 import Foundation
 
-class APICaller_Movie{
+class APICaller_Movie: APICaller_Show{
+
     static let shared = APICaller_Movie()
     
     enum APIError: Error{
@@ -37,7 +38,8 @@ class APICaller_Movie{
 
     /* Movies */
     //@ GET: Upcoming -> return [Show] || Error
-    func getUpcoming(completion: @escaping (Result<[Show], Error>) -> Void){
+    
+func getUpcoming(completion: @escaping (Result<[upComingShow], Error>) -> Void) {
         guard let url = URL(string: S.API_TV.Movies.getUpcomingMovies) else {return}
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
@@ -46,7 +48,9 @@ class APICaller_Movie{
             }
             do{
                 let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
-                completion(.success(results.results))
+                let upcomingShows = self.mapShowsToUpcomingShows(shows: results.results)
+
+                completion(.success(upcomingShows))
             } catch{
                 completion(.failure(APIError.failledTogetData))
 
@@ -98,7 +102,7 @@ class APICaller_Movie{
     /* Movies */
     // @ GET:
 
-    func getDiscover(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getMost(completion: @escaping (Result<[Show], Error>) -> Void){
         guard let url = URL(string: S.API_TV.Movies.getDiscoverMovies) else {return}
 
         
@@ -114,6 +118,44 @@ class APICaller_Movie{
                     completion(.failure(APIError.failledTogetData))
                 }
             }
+        task.resume()
+    }
+    
+    func getRecentlyAdded(completion: @escaping (Result<[Show], Error>) -> Void) {
+        guard let url = URL(string: S.API_TV.Movies.getDiscoverMovies) else {return}
+
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else{
+                return
+            }
+            
+            do{
+                let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
+                    completion(.success(results.results))
+            }catch{
+                    completion(.failure(APIError.failledTogetData))
+                }
+            }
+        task.resume()
+    }
+    
+    func doSearch(with query: String, completion: @escaping (Result<[Show], Error>) -> Void) {
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        
+        guard let url = URL(string: "\(S.API_TV.doSearchMovie)\(query)") else { return }
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {
+                completion(.failure(APIError.failledTogetData))
+                return
+            }
+            do {
+                let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
+                completion(.success(results.results))
+            } catch {
+                completion(.failure(APIError.failledTogetData))
+            }
+        }
         task.resume()
     }
 }

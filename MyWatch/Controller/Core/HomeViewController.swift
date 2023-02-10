@@ -20,7 +20,9 @@ enum whatData: Int{
 
 class HomeViewController: UIViewController {
     
-    private var showMovies = false
+    private var apiCaller  : APICaller_Show = APICaller_Movie.shared
+
+    private var showMovies = true
     private let disposeBag = DisposeBag()
     
     private var headerData : Show?
@@ -56,20 +58,43 @@ class HomeViewController: UIViewController {
     private func modifyUIMovieOrTvShow (){
         (self.tabBarController as? MainTabBarViewController)?.showMoviesSubject
             .subscribe(onNext: { [weak self] showMovies in
-                self?.showMovies = showMovies
-                self?.homeFeedTable.reloadData()
+                if( self?.showMovies != showMovies){
+              
+                    self?.showMovies = showMovies
+                    
+                    switch self?.showMovies {
+                    case true:
+                        self?.apiCaller = APICaller_Movie.shared
+                    case false:
+                        self?.apiCaller = APICaller_TV.shared
+                    case .none:
+                        self?.apiCaller = APICaller_Movie.shared
+                    case .some(_):
+                        break
+                    }
+                    self?.updateUI()
+                }
+            
             })
             .disposed(by: disposeBag)
     }
     
+    private func updateUI(){
+        configureHeaderView()
+        homeFeedTable.reloadData()
+    }
+    
     private func configureHeaderView () {
         
-        APICaller_Movie.shared.getTrending { [weak self] result in
+        apiCaller.getTrending { [weak self] result in
             switch result{
             case .success(let shows):
-                let selectedShow = shows.randomElement()
+                let nullSafeShows = shows.filter { show in
+                    return show.poster_path != nil
+                }
+                let selectedShow = nullSafeShows.randomElement()
                 self?.headerData = selectedShow
-                self?.headerView?.configure(with: showViewModel(showName: selectedShow?.original_title ?? selectedShow?.original_name ?? "" , posterURL: selectedShow?.poster_path ?? ""))
+                self?.headerView?.configure(with: showViewModel(showName: selectedShow?.original_title ?? selectedShow?.original_name ?? "" , posterURL: selectedShow?.poster_path ?? "", dateRelece: ""))
             case .failure(let erorr):
                 print(erorr.localizedDescription)
             }
@@ -77,28 +102,17 @@ class HomeViewController: UIViewController {
     }
     
     private func fetchData(for whatData: whatData, completion: @escaping (Result<[Show], Error>) -> Void) {
-        let apiCaller: Any
-        switch showMovies {
-        case true:
-            apiCaller = APICaller_Movie.shared
-        case false:
-            apiCaller = APICaller_TV.shared
-        }
+ 
         
         switch whatData {
         case .Trending:
-            (apiCaller as? APICaller_Movie)?.getTrending(completion: completion)
-            (apiCaller as? APICaller_TV)?.getTrending(completion: completion)
+            apiCaller.getTrending(completion: completion)
         case .Popular:
-            (apiCaller as? APICaller_Movie)?.getPopular(completion: completion)
-            (apiCaller as? APICaller_TV)?.getPopular(completion: completion)
+            apiCaller.getPopular(completion: completion)
         case .RecentlyAdded:
-            (apiCaller as? APICaller_Movie)?.getUpcoming(completion: completion)
-            (apiCaller as? APICaller_TV)?.getRecentlyAdded(completion: completion)
+            apiCaller.getRecentlyAdded(completion: completion)
         case .TopRated:
-            (apiCaller as? APICaller_Movie)?.getTopRated(completion: completion)
-            (apiCaller as? APICaller_TV)?.getTopRated(completion: completion)
-            
+            apiCaller.getTopRated(completion: completion)
         }
     }
     

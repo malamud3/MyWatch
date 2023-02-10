@@ -9,34 +9,24 @@ import Foundation
 
 
 
-class APICaller_Show{
-
-    static let shared = APICaller_Show()
+protocol APICaller_Show{
     
-    enum APIError: Error{
-        case failledTogetData
-    }
+    func getTrending(completion: @escaping (Result<[Show], Error>) -> Void)
+    func getPopular(completion: @escaping (Result<[Show], Error>) -> Void)
+    func getTopRated(completion: @escaping (Result<[Show], Error>) -> Void)
+    func getUpcoming(completion: @escaping (Result<[upComingShow], Error>) -> Void)
+    func getRecentlyAdded(completion: @escaping (Result<[Show], Error>) -> Void)
+    func doSearch(with query: String, completion: @escaping (Result<[Show], Error>) -> Void)
+}
+extension APICaller_Show{
     
-    /* Genaral*/
-    func doSearch(with query: String ,completion: @escaping (Result<[Show], Error>) -> Void){
-        
-        //Returns the character set for characters allowed in a user URL subcomponent.
-        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
-        
-        guard let url = URL(string: "\(S.API_TV.doSearch)\(query)") else {return}
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            do{
-                let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
-                print(results)
-                completion(.success(results.results))
-                
-            } catch{
-                completion(.failure(APIError.failledTogetData))
-            }
+    func mapShowsToUpcomingShows(shows: [Show]) -> [upComingShow] {
+        return shows.map { show in
+            upComingShow(first_air_date: show.release_date,
+                          id: show.id,
+                          name: show.original_name ?? show.original_title,
+                          poster_path: show.poster_path,
+                          overview: show.overview)
         }
-        task.resume()
     }
 }

@@ -12,8 +12,11 @@ import RxSwift
 
 class UpComingViewController: UIViewController {
     
-    private var shows:[Show] = [Show]()
-    private var showMovies = false
+    private var apiCaller  : APICaller_Show = APICaller_TV.shared
+
+    private var shows:[upComingShow] = [upComingShow]()
+
+    private var showMovies  = true
     private let disposeBag = DisposeBag()
     
     private let upcomingTable: UITableView = {
@@ -43,8 +46,19 @@ class UpComingViewController: UIViewController {
     private func modifyUIMovieOrTvShow (){
         (self.tabBarController as? MainTabBarViewController)?.showMoviesSubject
             .subscribe(onNext: { [weak self] showMovies in
+                
                 self?.showMovies = showMovies
-                self?.upcomingTable.reloadData()
+                switch self?.showMovies {
+                case true:
+                    self?.apiCaller = APICaller_Movie.shared
+                case false:
+                    self?.apiCaller = APICaller_TV.shared
+                case .none:
+                    self?.apiCaller = APICaller_Movie.shared
+                case .some(_):
+                    break
+                }
+                self?.fetchData()
             })
             .disposed(by: disposeBag)
     }
@@ -55,18 +69,13 @@ class UpComingViewController: UIViewController {
     
     private func fetchData(){
         
-        let apiCaller: Any
-        switch showMovies {
-        case true:
-            apiCaller = APICaller_Movie.shared
-        case false:
-            apiCaller = APICaller_TV.shared
-        }
-        
-        APICaller_Movie.shared.getUpcoming{[weak self] result in
+        apiCaller.getUpcoming{ [weak self] result in
             switch result{
             case.success(let shows):
-                self?.shows = shows
+                self?.shows = shows.filter { show in
+                    return show.poster_path != nil
+                }
+           
                 DispatchQueue.main.async {
                     self?.upcomingTable.reloadData()
                 }
@@ -88,7 +97,7 @@ extension UpComingViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: S.Identifier.ShowTableViewCell, for: indexPath) as? ShowTableViewCell else { return UITableViewCell() }
         
         let theShow = shows[indexPath.row]
-        cell.configure(with: showViewModel(showName: theShow.original_title ?? theShow.original_name ?? "Unknown", posterURL: theShow.poster_path ?? ""))
+        cell.configure(with: showViewModel(showName: theShow.name  ?? "Unknown", posterURL: theShow.poster_path ?? "",dateRelece: theShow.first_air_date?.fixFormatDate() ?? "Unknown"))
         return cell
     }
     

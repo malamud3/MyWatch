@@ -10,7 +10,7 @@ import Foundation
 
 
 struct S{
-    
+        
     struct Identifier{
         static let CollectionViewTableViewCell = "CollectionViewTableViewCell"
         static let ShowCollectionViewCell =      "ShowCollectionViewCell"
@@ -57,12 +57,11 @@ struct S{
     
     
     struct API_TV {
+        
         static let API_KEY = "606d075a4fbbc18c603c1dbf8c440945"
         static let baseURL = "https://api.themoviedb.org/3/"
         static let imgURL = "https://image.tmdb.org/t/p/w500/"
 
-
-        
         struct Movies{
             
             static let getTrendingMovies      = "\(baseURL)trending/movie/day?api_key=\(API_KEY)&language=en-US"
@@ -75,6 +74,8 @@ struct S{
             
             static let getRecentlyAddedMovies = "\(baseURL)movie/latest?api_key=\(API_KEY)&language=en-US&page=1"
 
+            
+            
 
             static let getDiscoverMovies = "\(baseURL)discover/movie?api_key=\(API_KEY)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate"
         }
@@ -84,19 +85,23 @@ struct S{
             
             static let getTrendingTvShows = "\(baseURL)trending/tv/day?api_key=\(API_KEY)&language=en-US"
             
-            static let getUpcomingTvShows = "\(baseURL)tv/upcoming?api_key=\(API_KEY)&language=en-US&page=1"
-            
+            static let getUpcomingTvShows = "\(baseURL)discover/tv?api_key=\(API_KEY)&language=en-US&sort_by=first_air_date.desc&first_air_date.gte="
+           
             static let getPopularTvShows  = "\(baseURL)tv/popular?api_key=\(API_KEY)&language=en-US&page=1"
             
             static let getTopRatedTvShows = "\(baseURL)tv/top_rated?api_key=\(API_KEY)&language=en-US&page=1"
             
             static let getRecentlyAddedTvShows = "\(baseURL)tv/latest?api_key=\(API_KEY)&language=en-US&page=1"
+            
+            
 
-            static let getDiscoverTvShows = "\(baseURL)discover/tv?api_key=\(API_KEY)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate"
+            static let getDiscoverTvShows = "\(baseURL)discover/tv?api_key=\(API_KEY)&language=en-US&sort_by=popularity.descpage=1&with_watch_monetization_types=flatrate"
         }
             
         // DO : search
-        static let doSearch = "\(baseURL)search/movie?api_key=\(API_KEY)&query=)"
+        static let doSearchMovie = "\(baseURL)search/movie?api_key=\(API_KEY)&query=)"
+        static let doSearchTv = "\(baseURL)search/tv?api_key=\(API_KEY)&query=)"
+
         
     }
     

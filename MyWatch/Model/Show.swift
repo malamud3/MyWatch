@@ -7,6 +7,9 @@
 
 import Foundation
 
+
+
+
 struct Show: Codable {
     
     let id: Int
@@ -20,6 +23,19 @@ struct Show: Codable {
     
 }
 
+struct upComingShow: Codable {
+    
+    let first_air_date: String?
+    let id: Int
+    let name: String?
+    let poster_path: String?
+    let overview: String?
+}
+
 struct MoviesResponse: Codable {
     let results: [Show]
+}
+
+struct upComingResponse: Codable {
+    let results: [upComingShow]
 }

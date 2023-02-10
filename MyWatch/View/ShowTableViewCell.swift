@@ -24,7 +24,20 @@ class ShowTableViewCell: UITableViewCell {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .white
+        return label
+    }()
+    
+    //Label
+    private let dateLabel: UILabel = {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.adjustsFontSizeToFitWidth = true
@@ -64,6 +77,9 @@ class ShowTableViewCell: UITableViewCell {
         contentView.addSubview(showPosterUIImageView)
         contentView.addSubview(showLabel)
         contentView.addSubview(btn_addToList)
+        contentView.addSubview(dateLabel)
+
+        
         
         applyConstraints()
         
@@ -80,39 +96,43 @@ class ShowTableViewCell: UITableViewCell {
         fatalError()
     }
     
-    // constrains
+    // Constraints
     private func applyConstraints() {
-        
-        // Poster image
-        let showPosterUIImageViewConstraints = [
-            showPosterUIImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            showPosterUIImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-            showPosterUIImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
-            showPosterUIImageView.widthAnchor.constraint(equalToConstant: 100)
+            
+            // Poster image
+            let showPosterUIImageViewConstraints = [
+                showPosterUIImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                showPosterUIImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+                showPosterUIImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+                showPosterUIImageView.widthAnchor.constraint(equalToConstant: 100)
 
-        ]
+            ]
 
-        //Label
-        let showLabelConstraints = [
-            showLabel.leadingAnchor.constraint(equalTo: showPosterUIImageView.trailingAnchor, constant: 5),
-            showLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            showLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
-        ]
-        
-        // btn
-        let btn_addToListConstraints = [
-            btn_addToList.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            btn_addToList.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            btn_addToList.topAnchor.constraint(equalTo: showLabel.bottomAnchor,constant: 5)
-
-
-     
-        ]
-        
-        NSLayoutConstraint.activate(showPosterUIImageViewConstraints)
-        NSLayoutConstraint.activate(showLabelConstraints)
-        NSLayoutConstraint.activate(btn_addToListConstraints)
-    }
+            // Show Label
+            let showLabelConstraints = [
+                showLabel.leadingAnchor.constraint(equalTo: showPosterUIImageView.trailingAnchor, constant: 5),
+                showLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+                showLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+            ]
+            
+            // Date Label
+            let dateLabelConstraints = [
+                dateLabel.leadingAnchor.constraint(equalTo: showPosterUIImageView.trailingAnchor, constant: 5),
+                dateLabel.topAnchor.constraint(equalTo: showLabel.bottomAnchor ,constant: 10),
+                dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+            ]
+            
+            // Add to List Button
+            let btn_addToListConstraints = [
+                btn_addToList.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+                btn_addToList.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+            ]
+            
+            NSLayoutConstraint.activate(showPosterUIImageViewConstraints)
+            NSLayoutConstraint.activate(showLabelConstraints)
+            NSLayoutConstraint.activate(dateLabelConstraints)
+            NSLayoutConstraint.activate(btn_addToListConstraints)
+        }
     
     // set Data for UI cell
     public func configure(with model: showViewModel){
@@ -120,6 +140,7 @@ class ShowTableViewCell: UITableViewCell {
         guard let url = URL(string: "\(S.API_TV.imgURL)\( model.posterURL)") else {return}
                 showPosterUIImageView.sd_setImage(with: url , completed: nil) // get show image
                 showLabel.text = model.showName                               // get show name
+                dateLabel.text = model.dateRelece
         
         animateIn()
     }

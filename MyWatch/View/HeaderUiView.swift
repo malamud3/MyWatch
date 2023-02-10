@@ -35,7 +35,6 @@ class HeaderUiView: UIView {
             let imageView = UIImageView ()
             imageView.contentMode = .scaleToFill
             imageView.clipsToBounds = true
-            imageView.image = UIImage(named: "")
             return imageView
         
     }()

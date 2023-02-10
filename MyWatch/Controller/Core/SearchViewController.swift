@@ -8,12 +8,13 @@
 import UIKit
 import RxSwift
 
-
-
 class SearchViewController: UIViewController  {
     
+    private var apiCaller  : APICaller_Show = APICaller_TV.shared
+
     private var shows:[Show] = [Show]()
-    private var showMovies = false
+
+    private var showMovies  = true
     private let disposeBag = DisposeBag()
     
     private let discoverTable: UITableView = {
@@ -59,9 +60,19 @@ class SearchViewController: UIViewController  {
     private func modifyUIMovieOrTvShow (){
         (self.tabBarController as? MainTabBarViewController)?.showMoviesSubject
             .subscribe(onNext: { [weak self] showMovies in
-                self?.showMovies = showMovies
-                self?.discoverTable.reloadData()
                 
+                self?.showMovies = showMovies
+                switch self?.showMovies {
+                case true:
+                    self?.apiCaller = APICaller_Movie.shared
+                case false:
+                    self?.apiCaller = APICaller_TV.shared
+                case .none:
+                    self?.apiCaller = APICaller_Movie.shared
+                case .some(_):
+                    break
+                }
+                self?.fetchData()
             })
             .disposed(by: disposeBag)
     }
@@ -72,7 +83,7 @@ class SearchViewController: UIViewController  {
     }
     
     private func fetchData () {
-        APICaller_Movie.shared.getDiscover { [weak self] result in
+        apiCaller.getPopular { [weak self] result in
             switch result {
             case .success(let shows):
                 self?.shows =  shows
@@ -97,7 +108,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         let theShow = shows[indexPath.row]
         
-        let model = showViewModel(showName: theShow.original_title ?? theShow.original_name ?? "Unknown", posterURL: theShow.poster_path ?? "")
+        let model = showViewModel(showName: theShow.original_title ?? theShow.original_name ?? "Unknown", posterURL: theShow.poster_path ?? "",dateRelece: "")
         cell.configure(with: model)
         
         return cell
@@ -122,8 +133,9 @@ extension SearchViewController: UISearchResultsUpdating, SearchResultsViewContro
         }
         
         resultsController.delegate = self
-
-        APICaller_Show.shared.doSearch(with: query) {  result in
+        
+        
+        APICaller_Movie.shared.doSearch(with: query) {  result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let shows):
@@ -133,7 +145,6 @@ extension SearchViewController: UISearchResultsUpdating, SearchResultsViewContro
                     print(error.localizedDescription)
                 }
             }
-            
         }
     }
     

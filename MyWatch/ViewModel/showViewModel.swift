@@ -11,4 +11,5 @@ struct showViewModel {
     
     let showName: String
     let posterURL: String
+    let dateRelece: String
 }

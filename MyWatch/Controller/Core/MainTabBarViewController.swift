@@ -12,7 +12,7 @@ import RxSwift
 class MainTabBarViewController: UITabBarController {
 
     let showMoviesSubject = PublishSubject<Bool>()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -77,6 +77,7 @@ class MainTabBarViewController: UITabBarController {
 
       @objc private func showTVShowsAction() {
           showMoviesSubject.onNext(false)
+
       }
     
     @objc private func handleLogin() {
