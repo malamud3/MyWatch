@@ -9,16 +9,17 @@ import Foundation
 
 
 
-protocol APICaller_Show{
+protocol APICaller_Show {
     
-    func getTrending(completion: @escaping (Result<[Show], Error>) -> Void)
-    func getPopular(completion: @escaping (Result<[Show], Error>) -> Void)
-    func getTopRated(completion: @escaping (Result<[Show], Error>) -> Void)
-    func getUpcoming(completion: @escaping (Result<[upComingShow], Error>) -> Void)
-    func getRecentlyAdded(completion: @escaping (Result<[Show], Error>) -> Void)
-    func doSearch(with query: String, completion: @escaping (Result<[Show], Error>) -> Void)
+    func getTrending (completion: @escaping ( Result<[Show], Error> ) -> Void )
+    func getPopular (completion:  @escaping ( Result<[Show], Error> ) -> Void )
+    func getTopRated (completion: @escaping ( Result<[Show], Error> ) -> Void )
+    func getUpcoming(with Mypage: Int,completion: @escaping (Result<[upComingShow], Error>) -> Void)
+    func getRecentlyAdded (completion: @escaping ( Result<[Show], Error> ) -> Void )
+    func doSearch (with query: String, completion: @escaping ( Result<[Show], Error> ) -> Void )
 }
-extension APICaller_Show{
+    
+extension APICaller_Show {
     
     func mapShowsToUpcomingShows(shows: [Show]) -> [upComingShow] {
         return shows.map { show in
@@ -27,6 +28,32 @@ extension APICaller_Show{
                           name: show.original_name ?? show.original_title,
                           poster_path: show.poster_path,
                           overview: show.overview)
+        }
+    }
+    
+    func mapUpcomingShowsToShows(shows: [upComingShow]) -> [Show] {
+        return shows.map { show in
+            Show (id: show.id,
+                  original_name: "",
+                  original_title: show.name,
+                  poster_path: show.poster_path,
+                  overview: show.overview,
+                  vote_count: 0,
+                  release_date: show.first_air_date,
+                  vote_average: 0)
+        }
+    }
+    
+    func mapRecentlyAddedMovieToShows(shows: [recentlyAddedMovie]) -> [Show] {
+        return shows.map { show in
+            Show (id: show.id,
+                  original_name: "",
+                  original_title: show.original_title,
+                  poster_path: show.poster_path,
+                  overview: show.overview,
+                  vote_count: 0,
+                  release_date: show.release_date,
+                  vote_average: 0)
         }
     }
 }

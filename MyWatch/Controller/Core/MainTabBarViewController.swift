@@ -54,7 +54,7 @@ class MainTabBarViewController: UITabBarController {
    // NAV -> Porfile, LOGO-> FirstPage
     
     private func configureNavbar(){
-        let profileMangerBtn =        UIBarButtonItem(image: UIImage(systemName: "person"), style:.done, target: self, action: #selector(handleLogin))
+        let profileMangerBtn =         UIBarButtonItem(image: UIImage(systemName: "person"), style:.done, target: self, action: #selector(handleLogin))
         let  moviesBtn        =        UIBarButtonItem(title: "Movies", style: .plain, target: self, action: #selector(showMoviesAction))
         let  tvShowsBtn       =        UIBarButtonItem(title: "TV Shows", style: .plain, target: self, action: #selector(showTVShowsAction))
         let  logoBtn          =        UIBarButtonItem(image: UIImage(named: S.picName.Logo), style: .done, target: nil, action: nil)

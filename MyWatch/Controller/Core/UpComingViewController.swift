@@ -12,12 +12,14 @@ import RxSwift
 
 class UpComingViewController: UIViewController {
     
-    private var apiCaller  : APICaller_Show = APICaller_TV.shared
+    private var apiCaller  : APICaller_Show = APICaller_Movie.shared
 
     private var shows:[upComingShow] = [upComingShow]()
 
     private var showMovies  = true
     private let disposeBag = DisposeBag()
+    
+    private var myPage = 1
     
     private let upcomingTable: UITableView = {
         
@@ -69,12 +71,11 @@ class UpComingViewController: UIViewController {
     
     private func fetchData(){
         
-        apiCaller.getUpcoming{ [weak self] result in
+        apiCaller.getUpcoming(with: myPage){ [weak self] result in
             switch result{
             case.success(let shows):
-                self?.shows = shows.filter { show in
-                    return show.poster_path != nil
-                }
+                
+                self?.shows = self?.filterShows(shows) ?? shows
            
                 DispatchQueue.main.async {
                     self?.upcomingTable.reloadData()
@@ -83,6 +84,27 @@ class UpComingViewController: UIViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    func filterShows(_ shows: [upComingShow]) -> [upComingShow] {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let calendar = Calendar.current
+        
+        return shows.filter { show in
+            guard let firstAirDateString = show.first_air_date,
+                  let firstAirDate = formatter.date(from: firstAirDateString) else {
+                return false
+            }
+            let day = calendar.component(.day, from: firstAirDate)
+            let month = calendar.component(.month, from: firstAirDate)
+            let year = calendar.component(.year, from: firstAirDate)
+            let today = calendar.component(.day, from: Date())
+            let currentMonth = calendar.component(.month, from: Date())
+            let currentYear = calendar.component(.year, from: Date())
+            return show.poster_path != nil &&
+             year >= currentYear && month >= currentMonth && day >= today
         }
     }
 }
@@ -104,5 +126,27 @@ extension UpComingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+         let lastItem = shows.count - 1
+         myPage+=1
+         if indexPath.row == lastItem {
+             // make API call to get more data
+             apiCaller.getUpcoming(with: myPage) { [weak self] result in
+                 switch result {
+                 case .success(let shows):
+                     if shows.count == 0 {
+                                          return
+                    }
+                     self?.shows += self?.filterShows(shows) ?? shows
+                     DispatchQueue.main.async {
+                         self?.upcomingTable.reloadData()
+                     }
+                 case .failure(let error):
+                     print(error.localizedDescription)
+                 }
+             }
+         }
+     }
 
 }

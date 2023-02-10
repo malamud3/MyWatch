@@ -110,7 +110,8 @@ class HomeViewController: UIViewController {
         case .Popular:
             apiCaller.getPopular(completion: completion)
         case .RecentlyAdded:
-            apiCaller.getRecentlyAdded(completion: completion)
+           apiCaller.getRecentlyAdded(completion: completion)
+
         case .TopRated:
             apiCaller.getTopRated(completion: completion)
         }
@@ -146,7 +147,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         fetchData(for: whatData(rawValue: indexPath.section) ?? whatData.Popular) { result in
             switch result {
             case .success(let shows):
-                cell.congigure(with: shows)
+                let fixShows = shows.filter { show in
+                    return show.poster_path != nil
+                }
+                cell.congigure(with: fixShows)
             case .failure(let error):
                 print(error.localizedDescription)
             }

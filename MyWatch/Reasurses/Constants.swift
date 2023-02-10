@@ -66,18 +66,14 @@ struct S{
             
             static let getTrendingMovies      = "\(baseURL)trending/movie/day?api_key=\(API_KEY)&language=en-US"
             
-            static let getUpcomingMovies      = "\(baseURL)movie/upcoming?api_key=\(API_KEY)&language=en-US&page=1"
+            static let getUpcomingMovies      = "\(baseURL)movie/upcoming?api_key=\(API_KEY)"
             
             static let getPopularMovies       = "\(baseURL)movie/popular?api_key=\(API_KEY)&language=en-US&page=1"
             
             static let getTopRatedMovies      = "\(baseURL)movie/top_rated?api_key=\(API_KEY)&language=en-US&page=1"
             
-            static let getRecentlyAddedMovies = "\(baseURL)movie/latest?api_key=\(API_KEY)&language=en-US&page=1"
+            static let getRecentlyAddedMovies = "\(baseURL)discover/movie?api_key=\(API_KEY)&sort_by=release_date.desc&include_adult=false&page=1&year=2023"
 
-            
-            
-
-            static let getDiscoverMovies = "\(baseURL)discover/movie?api_key=\(API_KEY)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate"
         }
         
         
@@ -85,17 +81,14 @@ struct S{
             
             static let getTrendingTvShows = "\(baseURL)trending/tv/day?api_key=\(API_KEY)&language=en-US"
             
-            static let getUpcomingTvShows = "\(baseURL)discover/tv?api_key=\(API_KEY)&language=en-US&sort_by=first_air_date.desc&first_air_date.gte="
+            static let getUpcomingTvShows = "\(baseURL)discover/tv?api_key=\(API_KEY)&include_null_first_air_dates=false&sort_by=first_air_date.desc&first_air_date.gte="
            
             static let getPopularTvShows  = "\(baseURL)tv/popular?api_key=\(API_KEY)&language=en-US&page=1"
             
             static let getTopRatedTvShows = "\(baseURL)tv/top_rated?api_key=\(API_KEY)&language=en-US&page=1"
             
-            static let getRecentlyAddedTvShows = "\(baseURL)tv/latest?api_key=\(API_KEY)&language=en-US&page=1"
+            static let getRecentlyAddedTvShows = "\(baseURL)discover/tv?api_key=\(API_KEY)&page=1&include_null_first_air_dates=false&sort_by=first_air_date.desc&first_air_date.lte="
             
-            
-
-            static let getDiscoverTvShows = "\(baseURL)discover/tv?api_key=\(API_KEY)&language=en-US&sort_by=popularity.descpage=1&with_watch_monetization_types=flatrate"
         }
             
         // DO : search

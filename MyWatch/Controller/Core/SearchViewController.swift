@@ -86,7 +86,10 @@ class SearchViewController: UIViewController  {
         apiCaller.getPopular { [weak self] result in
             switch result {
             case .success(let shows):
-                self?.shows =  shows
+                self?.shows = shows.filter { show in
+                    return show.poster_path != nil
+                }
+                
                 DispatchQueue.main.async {
                     self?.discoverTable.reloadData()
                 }

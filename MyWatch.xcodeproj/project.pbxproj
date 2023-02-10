@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,7 +45,6 @@
 		A9A07439298D1D08004799FD /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A07438298D1D08004799FD /* RegisterViewModel.swift */; };
 		A9A0743B298D1D5E004799FD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0743A298D1D5E004799FD /* RegisterViewController.swift */; };
 		A9A0743D298D1F98004799FD /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0743C298D1F98004799FD /* LoginViewModelTests.swift */; };
-		A9C03AD52992684E001040AC /* TvShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C03AD42992684E001040AC /* TvShow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,7 +108,6 @@
 		A9A07438298D1D08004799FD /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		A9A0743A298D1D5E004799FD /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A9A0743C298D1F98004799FD /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
-		A9C03AD42992684E001040AC /* TvShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShow.swift; sourceTree = "<group>"; };
 		BA0237EB088B083F6EC59839 /* Pods-MyWatchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatchTests.release.xcconfig"; path = "Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests.release.xcconfig"; sourceTree = "<group>"; };
 		D9D00FC93BE60F694ED9B44B /* Pods-MyWatchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatchTests.debug.xcconfig"; path = "Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E48A3CCC2A8874C04E03A455 /* Pods_MyWatch_MyWatchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWatch_MyWatchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -297,7 +295,6 @@
 			isa = PBXGroup;
 			children = (
 				A925CC9E298D044B001213BE /* Show.swift */,
-				A9C03AD42992684E001040AC /* TvShow.swift */,
 				A925CC9F298D044B001213BE /* YoutubeSearchResponse.swift */,
 			);
 			path = Model;
@@ -438,7 +435,7 @@
 				};
 			};
 			buildConfigurationList = A925CC46298C3564001213BE /* Build configuration list for PBXProject "MyWatch" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -627,7 +624,6 @@
 				A925CC51298C3564001213BE /* SceneDelegate.swift in Sources */,
 				A925CC95298D0420001213BE /* MainTabBarViewController.swift in Sources */,
 				A925CCA9298D044D001213BE /* YoutubeSearchResponse.swift in Sources */,
-				A9C03AD52992684E001040AC /* TvShow.swift in Sources */,
 				A925CCAB298D044D001213BE /* ShowTrailerViewModel.swift in Sources */,
 				A9A0743B298D1D5E004799FD /* RegisterViewController.swift in Sources */,
 				A925CC96298D0420001213BE /* showTrailerViewController.swift in Sources */,

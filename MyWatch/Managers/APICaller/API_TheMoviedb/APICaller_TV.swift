@@ -27,7 +27,6 @@ class APICaller_TV: APICaller_Show{
             }
             do{
                 let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
-//                self.getTvShowData(with: results.results[0].id)
                 completion(.success(results.results))
                 
             } catch{
@@ -80,14 +79,14 @@ class APICaller_TV: APICaller_Show{
     
 
     
-    func getUpcoming(completion: @escaping (Result<[upComingShow], Error>) -> Void){
+    func getUpcoming(with Mypage: Int,completion: @escaping (Result<[upComingShow], Error>) -> Void){
         
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let today = formatter.string(from: date)
-        
-        guard let url = URL(string: "\(S.API_TV.TVshows.getUpcomingTvShows)\(today)&page=1&timezone=Israel%2FTel_Aviv&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0") else {return}
+
+        guard let url = URL(string: "\(S.API_TV.TVshows.getUpcomingTvShows)\(today)&page=\(Mypage)") else {return}
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
                 return
@@ -103,28 +102,32 @@ class APICaller_TV: APICaller_Show{
         }
         task.resume()
     }
-
-          
+    
     func getRecentlyAdded(completion: @escaping (Result<[Show], Error>) -> Void){
-
-        guard let url = URL(string: S.API_TV.TVshows.getRecentlyAddedTvShows) else {return}
-
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let today = formatter.string(from: date)
+        
+        guard let url = URL(string: "\(S.API_TV.TVshows.getRecentlyAddedTvShows)\(today)") else {return}
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
                 return
             }
             do{
-                let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
-                completion(.success(results.results))
+                let results = try JSONDecoder().decode(upComingResponse.self, from: data)
+                let fixedData = self.mapUpcomingShowsToShows(shows: results.results)
 
+                completion(.success(fixedData))
+                
+                
             } catch{
                 completion(.failure(APIError.failledTogetData))
             }
         }
         task.resume()
     }
-    
-
     
     // @ GET: Trending(Most views in 24h) -> return [Movie] || Error
     func getTvShowData(with id: Int){

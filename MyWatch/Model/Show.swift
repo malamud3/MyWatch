@@ -9,7 +9,7 @@ import Foundation
 
 
 
-
+//Genral
 struct Show: Codable {
     
     let id: Int
@@ -23,6 +23,18 @@ struct Show: Codable {
     
 }
 
+//Main Page -> recently Added Movie
+struct recentlyAddedMovie: Codable {
+    
+    let id: Int
+    let original_title: String?
+    let poster_path: String?
+    let overview: String?
+    let release_date: String?
+}
+
+
+//Main Page -> recently Added tv and upComingShow
 struct upComingShow: Codable {
     
     let first_air_date: String?
@@ -38,4 +50,8 @@ struct MoviesResponse: Codable {
 
 struct upComingResponse: Codable {
     let results: [upComingShow]
+}
+
+struct recentlyAddedResponse: Codable {
+    let results: [recentlyAddedMovie]
 }
