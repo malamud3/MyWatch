@@ -20,6 +20,7 @@ struct Show: Codable {
     let vote_count: Int
     let release_date: String?
     let vote_average: Double
+    let genre_ids: [Int]
     
 }
 
@@ -31,6 +32,8 @@ struct recentlyAddedMovie: Codable {
     let poster_path: String?
     let overview: String?
     let release_date: String?
+    let genre_ids: [Int]
+
 }
 
 
@@ -42,6 +45,8 @@ struct upComingShow: Codable {
     let name: String?
     let poster_path: String?
     let overview: String?
+    let genre_ids: [Int]
+    
 }
 
 struct MoviesResponse: Codable {

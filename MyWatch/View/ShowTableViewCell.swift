@@ -79,8 +79,6 @@ class ShowTableViewCell: UITableViewCell {
         contentView.addSubview(btn_addToList)
         contentView.addSubview(dateLabel)
 
-        
-        
         applyConstraints()
         
     }

@@ -40,11 +40,14 @@
 		A925CCB2298D047E001213BE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CCB0298D047E001213BE /* Extensions.swift */; };
 		A92E4D3E298D2B8B00F57FD1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A92E4D3D298D2B8B00F57FD1 /* GoogleService-Info.plist */; };
 		A92E4D40298D60C000F57FD1 /* APICaller_FireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92E4D3F298D60C000F57FD1 /* APICaller_FireBase.swift */; };
+		A94D9F3729993D1600B40820 /* TopBarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D9F3629993D1600B40820 /* TopBarButtonItemView.swift */; };
+		A94D9F39299A3BFE00B40820 /* GenresListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D9F38299A3BFE00B40820 /* GenresListViewController.swift */; };
 		A95C6CE229910C3200A0A4E9 /* APICaller_Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95C6CE129910C3200A0A4E9 /* APICaller_Show.swift */; };
 		A95C6CE429910C5100A0A4E9 /* APICaller_Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95C6CE329910C5100A0A4E9 /* APICaller_Movie.swift */; };
 		A9A07439298D1D08004799FD /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A07438298D1D08004799FD /* RegisterViewModel.swift */; };
 		A9A0743B298D1D5E004799FD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0743A298D1D5E004799FD /* RegisterViewController.swift */; };
 		A9A0743D298D1F98004799FD /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0743C298D1F98004799FD /* LoginViewModelTests.swift */; };
+		A9F9DCC4299E39E4000211F7 /* GenresTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9DCC3299E39E4000211F7 /* GenresTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,11 +106,14 @@
 		A925CCB0298D047E001213BE /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A92E4D3D298D2B8B00F57FD1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A92E4D3F298D60C000F57FD1 /* APICaller_FireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller_FireBase.swift; sourceTree = "<group>"; };
+		A94D9F3629993D1600B40820 /* TopBarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarButtonItemView.swift; sourceTree = "<group>"; };
+		A94D9F38299A3BFE00B40820 /* GenresListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresListViewController.swift; sourceTree = "<group>"; };
 		A95C6CE129910C3200A0A4E9 /* APICaller_Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller_Show.swift; sourceTree = "<group>"; };
 		A95C6CE329910C5100A0A4E9 /* APICaller_Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller_Movie.swift; sourceTree = "<group>"; };
 		A9A07438298D1D08004799FD /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		A9A0743A298D1D5E004799FD /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A9A0743C298D1F98004799FD /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
+		A9F9DCC3299E39E4000211F7 /* GenresTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresTableViewCell.swift; sourceTree = "<group>"; };
 		BA0237EB088B083F6EC59839 /* Pods-MyWatchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatchTests.release.xcconfig"; path = "Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests.release.xcconfig"; sourceTree = "<group>"; };
 		D9D00FC93BE60F694ED9B44B /* Pods-MyWatchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatchTests.debug.xcconfig"; path = "Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E48A3CCC2A8874C04E03A455 /* Pods_MyWatch_MyWatchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWatch_MyWatchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -274,6 +280,7 @@
 		A925CC8D298D041F001213BE /* Sub */ = {
 			isa = PBXGroup;
 			children = (
+				A94D9F38299A3BFE00B40820 /* GenresListViewController.swift */,
 				A925CC8E298D041F001213BE /* showTrailerViewController.swift */,
 				A925CC8F298D041F001213BE /* SearchResultsViewController.swift */,
 			);
@@ -287,6 +294,8 @@
 				A925CC9A298D044A001213BE /* CollectionTableViewCell.swift */,
 				A925CC9B298D044A001213BE /* ShowCollectionViewCell.swift */,
 				A925CC9C298D044A001213BE /* ShowTableViewCell.swift */,
+				A94D9F3629993D1600B40820 /* TopBarButtonItemView.swift */,
+				A9F9DCC3299E39E4000211F7 /* GenresTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -607,10 +616,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A925CCB2298D047E001213BE /* Extensions.swift in Sources */,
+				A94D9F39299A3BFE00B40820 /* GenresListViewController.swift in Sources */,
 				A925CC93298D0420001213BE /* UpComingViewController.swift in Sources */,
 				A925CCB1298D047E001213BE /* Constants.swift in Sources */,
 				A925CCA8298D044D001213BE /* Show.swift in Sources */,
+				A9F9DCC4299E39E4000211F7 /* GenresTableViewCell.swift in Sources */,
 				A925CC97298D0420001213BE /* SearchResultsViewController.swift in Sources */,
+				A94D9F3729993D1600B40820 /* TopBarButtonItemView.swift in Sources */,
 				A95C6CE229910C3200A0A4E9 /* APICaller_Show.swift in Sources */,
 				A925CC92298D0420001213BE /* LoginViewController.swift in Sources */,
 				A925CCA5298D044D001213BE /* CollectionTableViewCell.swift in Sources */,

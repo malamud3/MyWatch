@@ -27,7 +27,8 @@ extension APICaller_Show {
                           id: show.id,
                           name: show.original_name ?? show.original_title,
                           poster_path: show.poster_path,
-                          overview: show.overview)
+                          overview: show.overview,
+                          genre_ids: show.genre_ids)
         }
     }
     
@@ -40,7 +41,8 @@ extension APICaller_Show {
                   overview: show.overview,
                   vote_count: 0,
                   release_date: show.first_air_date,
-                  vote_average: 0)
+                  vote_average: 0,
+                  genre_ids: show.genre_ids)
         }
     }
     
@@ -53,7 +55,9 @@ extension APICaller_Show {
                   overview: show.overview,
                   vote_count: 0,
                   release_date: show.release_date,
-                  vote_average: 0)
+                  vote_average: 0,
+                  genre_ids: show.genre_ids
+            )
         }
     }
 }

@@ -11,10 +11,38 @@ import Foundation
 
 struct S{
         
+    struct genresIndex{
+        //https://api.themoviedb.org/3/genre/tv/list?api_key=606d075a4fbbc18c603c1dbf8c440945&language=en-US
+        //https://api.themoviedb.org/3/genre/movie/list?api_key=606d075a4fbbc18c603c1dbf8c440945&language=en-US
+
+        static let genre: [Int16: String] = [
+            
+            10759    :  "Action & Adventure",
+            16       :  "Animation",
+            35       :  "Comedy",
+            80       :  "Crime",
+            99       :  "Documentary",
+            18       :  "Drama",
+            10751    :  "Family",
+            10762    :  "Kids",
+            9648     :  "Mystery",
+            10763    :  "News",
+            10764    :  "Reality",
+            10765    :  "Sci-Fi & Fantasy",
+            10766    :  "Soap",
+            10767    :  "Talk",
+            10768    :  "War & Politics",
+            37       :  "Western"
+           
+        ]
+        
+     
+    }
     struct Identifier{
         static let CollectionViewTableViewCell = "CollectionViewTableViewCell"
-        static let ShowCollectionViewCell =      "ShowCollectionViewCell"
-        static let ShowTableViewCell =           "ShowTableViewCell"
+        static let ShowCollectionViewCell      = "ShowCollectionViewCell"
+        static let ShowTableViewCell           = "ShowTableViewCell"
+        static let GenreTableViewCell          = "GenreTableViewCell"
     }
    
     struct ButtonName {
@@ -63,7 +91,8 @@ struct S{
         static let imgURL = "https://image.tmdb.org/t/p/w500/"
 
         struct Movies{
-            
+            static let getGenreMoviesIndex      =
+               "\(baseURL)movie/list?api_key=\(API_KEY)&language=en-US"
             static let getTrendingMovies      = "\(baseURL)trending/movie/day?api_key=\(API_KEY)&language=en-US"
             
             static let getUpcomingMovies      = "\(baseURL)movie/upcoming?api_key=\(API_KEY)"
@@ -78,6 +107,9 @@ struct S{
         
         
         struct TVshows{
+            
+            static let getGenreTVshowsIndex      =
+               "\(baseURL)movie/list?api_key=\(API_KEY)&language=en-US"
             
             static let getTrendingTvShows = "\(baseURL)trending/tv/day?api_key=\(API_KEY)&language=en-US"
             

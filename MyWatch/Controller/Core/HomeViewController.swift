@@ -46,7 +46,8 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         
         configureHeaderView ()
-        headerView = HeaderUiView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        
+        headerView = HeaderUiView(frame: CGRect(x: 0, y: -view.bounds.height - 10, width: view.bounds.width, height: view.bounds.height / 1.7))
         tableView.tableHeaderView = headerView
         
         modifyUI()

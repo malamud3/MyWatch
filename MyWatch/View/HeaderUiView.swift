@@ -11,13 +11,26 @@ class HeaderUiView: UIView {
     
     //Buttons
     private let btn_addToList: UIButton = {
-            let btn = UIButton()
-            let image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
-            btn.translatesAutoresizingMaskIntoConstraints = false
-            btn.setImage(image, for: .normal)
-        
-            return btn
+            let button = UIButton()
+            let image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.setImage(image, for: .normal)
+            button.tintColor = UIColor.white
+
+            return button
         }()
+    
+    
+    private let btn_info: UIButton = {
+            let button = UIButton()
+            let image = UIImage(systemName: "info.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.setImage(image, for: .normal)
+            button.tintColor = UIColor.white
+
+            return button
+        }()
+    
     
     private let btn_play: UIButton = {
         
@@ -35,41 +48,46 @@ class HeaderUiView: UIView {
             let imageView = UIImageView ()
             imageView.contentMode = .scaleToFill
             imageView.clipsToBounds = true
+            imageView.sizeToFit()
             return imageView
         
     }()
     
     private let containerView: UIView = {
         let view = UIView()
-        view.layer.shadowColor = UIColor.gray.cgColor
-        view.layer.shadowOpacity = 0.2
-        view.layer.shadowOffset = .zero
-        view.layer.shadowRadius = 5
+        
         view.layer.cornerRadius = 5
         view.clipsToBounds = true
+        view.contentMode = .scaleToFill
+
         return view
     }()
+    
     
     // fade effect
     private func addGradient(){
             let gradientLayer = CAGradientLayer()
-            gradientLayer.colors = [
-                UIColor.clear.cgColor,
-                UIColor.systemBackground.cgColor
-            ]
-        gradientLayer.frame = bounds
+            gradientLayer.colors = [UIColor.clear.cgColor,
+                                    UIColor.systemBackground.withAlphaComponent(0.79).cgColor]
+            gradientLayer.frame = bounds
             containerView.layer.addSublayer(gradientLayer)
+            
+            addSubview(btn_play)
+            addSubview(btn_addToList)
+            addSubview(btn_info)
+
     }
     
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         self.addSubview(containerView)
 
         containerView.addSubview(imageView_header)
-        containerView.addSubview(btn_play)
-        containerView.addSubview(btn_addToList)
+        addSubview(btn_play)
+        addSubview(btn_addToList)
+        addSubview(btn_info)
+
         
         addGradient()
         
@@ -84,18 +102,32 @@ class HeaderUiView: UIView {
     // constrains
     private func applyConstraints() {
         
-        let playButtonConstraints = [
-            btn_play.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 70),
-            btn_play.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
-            btn_play.widthAnchor.constraint(equalToConstant: 120)
+   
+        let btnInfoConstraints = [
+            btn_info.trailingAnchor.constraint(equalTo: btn_play.leadingAnchor, constant: -30),
+            btn_info.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
         ]
+        
+        
+        let playButtonConstraints = [
+            btn_play.centerXAnchor.constraint(equalTo: centerXAnchor),
+            btn_play.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            btn_play.heightAnchor.constraint(equalToConstant: 20),
+            btn_play.widthAnchor.constraint(equalToConstant: 100)
+
+        ]
+        
         
         let addToListButtonConstraints = [
-            btn_addToList.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -60),
-            btn_addToList.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
-            btn_addToList.widthAnchor.constraint(equalToConstant: 120)
+            
+            btn_addToList.leadingAnchor.constraint(equalTo: btn_play.trailingAnchor, constant: 30),
+            btn_addToList.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+
+            
         ]
         
+ 
+        NSLayoutConstraint.activate(btnInfoConstraints)
         NSLayoutConstraint.activate(playButtonConstraints)
         NSLayoutConstraint.activate(addToListButtonConstraints)
     }
