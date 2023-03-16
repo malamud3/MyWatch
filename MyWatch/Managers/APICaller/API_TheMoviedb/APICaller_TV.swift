@@ -10,16 +10,21 @@ import Foundation
 
 class APICaller_TV: APICaller_Show{
 
-    
     static let shared = APICaller_TV()
     
     enum APIError: Error{
         case failledTogetData
     }
     
-    func getTrending(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getTrending(dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void){
+                
+        var urlString = "\(S.API_TV.TVshows.getTrendingTvShows)&page=\(Mypage)"
         
-        guard let url = URL(string: S.API_TV.TVshows.getTrendingTvShows) else {return}
+        if MyGaner != -1 {
+            urlString += "&with_genres=\(MyGaner)"
+        }
+        guard let url = URL(string: urlString) else { return }
+        
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
@@ -36,17 +41,22 @@ class APICaller_TV: APICaller_Show{
         task.resume()
     }
     
-    func getPopular(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getPopular(dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void){
         
-        guard let url = URL(string: S.API_TV.TVshows.getPopularTvShows) else {return}
+        var urlString = "\(S.API_TV.TVshows.getPopularTvShows)&page=\(Mypage)"
         
+        if MyGaner != -1 {
+            urlString += "&with_genres=\(MyGaner)"
+        }
+    
+        guard let url = URL(string: urlString) else { return }
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
                 return
             }
             do{
                 let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
-
+            //    print(results.results)
                 completion(.success(results.results))
                 
             } catch{
@@ -57,9 +67,14 @@ class APICaller_TV: APICaller_Show{
     }
 
     
-    func getTopRated(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getTopRated(dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void){
+                
+        var urlString = "\(S.API_TV.TVshows.getTrendingTvShows)&page=\(Mypage)"
         
-        guard let url = URL(string: S.API_TV.TVshows.getTrendingTvShows) else {return}
+        if MyGaner != -1 {
+            urlString += "&with_genres=\(MyGaner)"
+        }
+        guard let url = URL(string: urlString) else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
@@ -79,14 +94,20 @@ class APICaller_TV: APICaller_Show{
     
 
     
-    func getUpcoming(with Mypage: Int,completion: @escaping (Result<[upComingShow], Error>) -> Void){
+    func getUpcoming(dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[upComingShow], Error>) -> Void){
         
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let today = formatter.string(from: date)
 
-        guard let url = URL(string: "\(S.API_TV.TVshows.getUpcomingTvShows)\(today)&page=\(Mypage)") else {return}
+        var urlString = "\(S.API_TV.TVshows.getUpcomingTvShows)\(today)&page=\(Mypage)"
+        
+        if MyGaner != -1 {
+            urlString += "&with_genres=\(MyGaner)"
+        }
+        guard let url = URL(string: urlString) else { return }
+        
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
                 return
@@ -103,14 +124,19 @@ class APICaller_TV: APICaller_Show{
         task.resume()
     }
     
-    func getRecentlyAdded(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getRecentlyAdded(dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void){
         
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let today = formatter.string(from: date)
         
-        guard let url = URL(string: "\(S.API_TV.TVshows.getRecentlyAddedTvShows)\(today)") else {return}
+        var urlString = "\(S.API_TV.TVshows.getRecentlyAddedTvShows)\(today)&page=\(Mypage)"
+        
+        if MyGaner != -1 {
+            urlString += "&with_genres=\(MyGaner)"
+        }
+        guard let url = URL(string: urlString) else { return }
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
                 return
@@ -131,7 +157,6 @@ class APICaller_TV: APICaller_Show{
     
     // @ GET: Trending(Most views in 24h) -> return [Movie] || Error
     func getTvShowData(with id: Int){
-        print(id)
         guard let url = URL(string: "\(S.API_TV.baseURL)tv/\(id)?api_key=\(S.API_TV.API_KEY)") else {return}
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
@@ -139,9 +164,8 @@ class APICaller_TV: APICaller_Show{
                 return
             }
             do{
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                _ = try JSONSerialization.jsonObject(with: data, options: [])
                 
-                print(json)
 
               //  completion(.success(results.results))
                 

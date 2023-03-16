@@ -48,9 +48,7 @@ class HeaderUiView: UIView {
             let imageView = UIImageView ()
             imageView.contentMode = .scaleToFill
             imageView.clipsToBounds = true
-            imageView.sizeToFit()
             return imageView
-        
     }()
     
     private let containerView: UIView = {

@@ -83,7 +83,7 @@ class SearchViewController: UIViewController  {
     }
     
     private func fetchData () {
-        apiCaller.getPopular { [weak self] result in
+        apiCaller.getPopular(dataPage: 1, Ganerfilter: -1) { [weak self] result in
             switch result {
             case .success(let shows):
                 self?.shows = shows.filter { show in

@@ -21,13 +21,13 @@ enum whatData: Int{
 class HomeViewController: UIViewController {
     
     private var apiCaller  : APICaller_Show = APICaller_Movie.shared
+    private var selectedGenre: Int16 = 18
 
     private var showMovies = true
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     private var headerData : Show?
     private var headerView : HeaderUiView?
-    
     
     var sectionTitles: [String] = [S.HomeView_sectionTitles.Trending,S.HomeView_sectionTitles.Popular,S.HomeView_sectionTitles.RecentlyAdded,S.HomeView_sectionTitles.Top_Rated]
     
@@ -45,7 +45,7 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        configureHeaderView ()
+        configureHeaderView(with: selectedGenre)
         
         headerView = HeaderUiView(frame: CGRect(x: 0, y: -view.bounds.height - 10, width: view.bounds.width, height: view.bounds.height / 1.7))
         tableView.tableHeaderView = headerView
@@ -76,44 +76,108 @@ class HomeViewController: UIViewController {
             
             })
             .disposed(by: disposeBag)
+        
+        (self.tabBarController as? MainTabBarViewController)?.selectedGenreSubject
+            .subscribe(onNext: { [weak self] genre in
+                self?.selectedGenre = genre
+                print("\n\n\(String(describing: self?.selectedGenre))\n\n")
+                self?.updateUI()
+            })
+            .disposed(by: disposeBag)
+
     }
     
     private func updateUI(){
-        configureHeaderView()
+        configureHeaderView(with: selectedGenre)
         tableView.reloadData()
     }
     
-    private func configureHeaderView () {
-        
-        apiCaller.getTrending { [weak self] result in
+    private func configureHeaderView(with selectedGenre: Int16, page: Int = 1) {
+        apiCaller.getTrending(dataPage: page, Ganerfilter: selectedGenre) { [weak self] result in
             switch result{
             case .success(let shows):
-                let filteredShows = shows.filter { $0.poster_path != nil }
-                let selectedShow = filteredShows.randomElement()
-                self?.headerData = selectedShow
-                self?.headerView?.configure(with: showViewModel(showName: selectedShow?.original_title ?? selectedShow?.original_name ?? "" , posterURL: selectedShow?.poster_path ?? "", dateRelece: ""))
-                
-            case .failure(let erorr):
-                print(erorr.localizedDescription)
+                let filteredShows = shows.filter {
+                    if $0.poster_path != nil {
+                            let showGenres = $0.genre_ids
+                            return showGenres.contains(Int(selectedGenre))
+                    }
+                    return false
+                }
+                if let selectedShow = filteredShows.randomElement() {
+                    self?.headerData = selectedShow
+                    self?.headerView?.configure(with: showViewModel(showName: selectedShow.original_title ?? selectedShow.original_name ?? "" , posterURL: selectedShow.poster_path ?? "", dateRelece: ""))
+                } else {
+                    // If no matching shows were found, increment the page number and try again
+                    self?.configureHeaderView(with: selectedGenre, page: page + 1)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
     
-    private func fetchData(for whatData: whatData, completion: @escaping (Result<[Show], Error>) -> Void) {
- 
-        
-        switch whatData {
-        case .Trending:
-            apiCaller.getTrending(completion: completion)
-        case .Popular:
-            apiCaller.getPopular(completion: completion)
-        case .RecentlyAdded:
-           apiCaller.getRecentlyAdded(completion: completion)
-
-        case .TopRated:
-            apiCaller.getTopRated(completion: completion)
+    private func fetchData(for whatData: whatData, dataPage: Int = 1, completion: @escaping (Result<[Show], Error>) -> Void) {
+            
+            switch whatData {
+            case .Trending:
+                apiCaller.getTrending(dataPage: dataPage, Ganerfilter: selectedGenre) { result in
+                    switch result {
+                    case .success(let shows):
+                        if shows.isEmpty {
+                            self.fetchData(for: whatData, dataPage: dataPage + 1, completion: completion)
+                        }
+                        completion(.success(shows))
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        // If the API call failed, increment the data page and try again
+                        self.fetchData(for: whatData, dataPage: dataPage + 1, completion: completion)
+                    }
+                }
+            case .Popular:
+                apiCaller.getPopular(dataPage: dataPage, Ganerfilter: selectedGenre) { result in
+                    switch result {
+                    case .success(let shows):
+                        if shows.isEmpty {
+                            self.fetchData(for: whatData, dataPage: dataPage + 1, completion: completion)
+                        }
+                        completion(.success(shows))
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        // If the API call failed, increment the data page and try again
+                        self.fetchData(for: whatData, dataPage: dataPage + 1, completion: completion)
+                    }
+                }
+            case .RecentlyAdded:
+                apiCaller.getRecentlyAdded(dataPage: dataPage, Ganerfilter: selectedGenre) { result in
+                    switch result {
+                    case .success(let shows):
+                        if shows.isEmpty {
+                            self.fetchData(for: whatData, dataPage: dataPage + 1, completion: completion)
+                        }
+                        completion(.success(shows))
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        // If the API call failed, increment the data page and try again
+                        self.fetchData(for: whatData, dataPage: dataPage + 1, completion: completion)
+                    }
+                }
+            case .TopRated:
+                apiCaller.getTopRated(dataPage: dataPage, Ganerfilter: selectedGenre) { result in
+                    switch result {
+                    case .success(let shows):
+                        if shows.isEmpty {
+                            self.fetchData(for: whatData, dataPage: dataPage + 1, completion: completion)
+                        }
+                        completion(.success(shows))
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        // If the API call failed, increment the data page and try again
+                        self.fetchData(for: whatData, dataPage: dataPage + 1, completion: completion)
+                    }
+                }
+            }
         }
-    }
+
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -122,9 +186,6 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
-    
-
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
     }
@@ -184,6 +245,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         let defaultOffset = view.safeAreaInsets.top
         let offset = scrollView.contentOffset.y + defaultOffset
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0,-offset))
+
+
+            for cell in tableView.visibleCells {
+                if let collectionCell = cell as? CollectionTableViewCell {
+                    if collectionCell.hasReachedEnd {
+                        print(collectionCell.hasReachedEnd)
+                }
+            }
+        }
     }
     
     
@@ -200,3 +270,4 @@ extension HomeViewController: CollectionViewTableViewCellDelegate {
         }
     
 }
+

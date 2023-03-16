@@ -9,39 +9,50 @@ import Foundation
 
 class APICaller_Movie: APICaller_Show{
 
+
     static let shared = APICaller_Movie()
     
     enum APIError: Error{
         case failledTogetData
     }
     
-    /* Movies */
     // @ GET: Trending(Most views in 24h) -> return [Show] || Error
-    func getTrending(completion: @escaping (Result<[Show], Error>) -> Void){
+    func getTrending(dataPage Mypage: Int, Ganerfilter MyGaner: Int16, completion: @escaping (Result<[Show], Error>) -> Void) {
         
-        guard let url = URL(string: S.API_TV.Movies.getTrendingMovies) else {return}
+        var urlString = "\(S.API_TV.Movies.getTrendingMovies)&page=\(Mypage)"
+        
+        if MyGaner != -1 {
+            urlString += "&with_genres=\(MyGaner)"
+        }
+        
+        guard let url = URL(string: urlString) else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
+                completion(.failure(error ?? APIError.failledTogetData))
                 return
             }
-            do{
+            do {
                 let results = try JSONDecoder().decode(MoviesResponse.self, from: data)
                 completion(.success(results.results))
-                
-            } catch{
+            } catch {
                 completion(.failure(APIError.failledTogetData))
             }
         }
         task.resume()
     }
 
-    /* Movies */
     //@ GET: Upcoming -> return [Show] || Error
     
-    func getUpcoming(with Mypage: Int,completion: @escaping (Result<[upComingShow], Error>) -> Void){
-        guard let url = URL(string: "\(S.API_TV.Movies.getUpcomingMovies)&page=\(Mypage)") else {return}
+    func getUpcoming(dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[upComingShow], Error>) -> Void){
         
+        var urlString = "\(S.API_TV.Movies.getUpcomingMovies)&page=\(Mypage)"
+        
+        if MyGaner != -1 {
+            urlString += "&with_genres=\(MyGaner)"
+        }
+        guard let url = URL(string: urlString) else { return }
+
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else{
                 return
@@ -61,8 +72,15 @@ class APICaller_Movie: APICaller_Show{
     
     /* Movies */
     //@ GET: Popular -> return [Show] || Error
-    func getPopular(completion: @escaping (Result<[Show], Error>) -> Void){
-        guard let url = URL(string: S.API_TV.Movies.getPopularMovies) else {return}
+    func getPopular(dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void){
+        
+        
+        var urlString = "\(S.API_TV.Movies.getPopularMovies)&page=\(Mypage)"
+        
+        if MyGaner != -1 {
+            urlString += "&with_genres=\(MyGaner)"
+        }
+        guard let url = URL(string: urlString) else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else{
@@ -80,9 +98,14 @@ class APICaller_Movie: APICaller_Show{
 
     /* Movies */
     //@ GET: TopRate -> return [Show] || Error
-    func getTopRated(completion: @escaping (Result<[Show], Error>) -> Void){
-        guard let url = URL(string: S.API_TV.Movies.getTopRatedMovies) else {return}
-
+    func getTopRated(dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void){
+        
+        var urlString = "\(S.API_TV.Movies.getTopRatedMovies)&page=\(Mypage)"
+        
+        if MyGaner != -1 {
+            urlString += "&with_genres=\(MyGaner)"
+        }
+        guard let url = URL(string: urlString) else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else{
@@ -102,9 +125,14 @@ class APICaller_Movie: APICaller_Show{
     /* Movies */
     // @ GET:
     
-    func getRecentlyAdded(completion: @escaping (Result<[Show], Error>) -> Void){
-        guard let url = URL(string: S.API_TV.Movies.getRecentlyAddedMovies) else {return}
-
+    func getRecentlyAdded(dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void){
+        
+        var urlString = "\(S.API_TV.Movies.getRecentlyAddedMovies)&page=\(Mypage)"
+        
+        if MyGaner != -1 {
+            urlString += "&with_genres=\(MyGaner)"
+        }
+        guard let url = URL(string: urlString) else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else{
@@ -114,7 +142,6 @@ class APICaller_Movie: APICaller_Show{
             do{
                 let results = try JSONDecoder().decode(recentlyAddedResponse.self, from: data)
                 let fixData = self.mapRecentlyAddedMovieToShows(shows: results.results)
-                print(fixData)
                     completion(.success(fixData))
             }catch{
                     completion(.failure(APIError.failledTogetData))

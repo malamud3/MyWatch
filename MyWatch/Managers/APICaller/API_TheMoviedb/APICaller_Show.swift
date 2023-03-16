@@ -11,12 +11,12 @@ import Foundation
 
 protocol APICaller_Show {
     
-    func getTrending (completion: @escaping ( Result<[Show], Error> ) -> Void )
-    func getPopular (completion:  @escaping ( Result<[Show], Error> ) -> Void )
-    func getTopRated (completion: @escaping ( Result<[Show], Error> ) -> Void )
-    func getUpcoming(with Mypage: Int,completion: @escaping (Result<[upComingShow], Error>) -> Void)
-    func getRecentlyAdded (completion: @escaping ( Result<[Show], Error> ) -> Void )
-    func doSearch (with query: String, completion: @escaping ( Result<[Show], Error> ) -> Void )
+    func getTrending        (dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void)
+    func getPopular         (dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void)
+    func getTopRated        (dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void)
+    func getUpcoming        (dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[upComingShow], Error>) -> Void)
+    func getRecentlyAdded   (dataPage Mypage: Int,Ganerfilter MyGaner: Int16,completion: @escaping (Result<[Show], Error>) -> Void)
+    func doSearch           (with query: String, completion: @escaping ( Result<[Show], Error> ) -> Void )
 }
     
 extension APICaller_Show {

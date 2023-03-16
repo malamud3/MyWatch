@@ -12,11 +12,16 @@ import Foundation
 struct S{
         
     struct genresIndex{
-        //https://api.themoviedb.org/3/genre/tv/list?api_key=606d075a4fbbc18c603c1dbf8c440945&language=en-US
-        //https://api.themoviedb.org/3/genre/movie/list?api_key=606d075a4fbbc18c603c1dbf8c440945&language=en-US
+        /*
+         https://developers.themoviedb.org/3
+        */
+        
 
-        static let genre: [Int16: String] = [
-            
+        static let TV_genres: [Int16: String] = [
+            /*
+             https://api.themoviedb.org/3/genre/tv/list?api_key=606d075a4fbbc18c603c1dbf8c440945&language=en-US
+             */
+
             10759    :  "Action & Adventure",
             16       :  "Animation",
             35       :  "Comedy",
@@ -24,20 +29,35 @@ struct S{
             99       :  "Documentary",
             18       :  "Drama",
             10751    :  "Family",
-            10762    :  "Kids",
             9648     :  "Mystery",
-            10763    :  "News",
-            10764    :  "Reality",
-            10765    :  "Sci-Fi & Fantasy",
-            10766    :  "Soap",
-            10767    :  "Talk",
-            10768    :  "War & Politics",
-            37       :  "Western"
-           
+            10765    :  "Science Fiction",
+            37       :  "Western",
+            10768    :  "War & Politics"
         ]
         
+        static let Movie_genres: [Int16: String] = [
+
+            28       :  "Action",
+            12       :  "Adventure",
+            16       :  "Animation",
+            35       :  "Comedy",
+            80       :  "Crime",
+            99       :  "Documentary",
+            18       :  "Drama",
+            10751    :  "Family",
+            14       :  "Fantasy",
+            36       :  "History",
+            27       :  "Horror",
+            9648     :  "Mystery",
+            10749    :  "Romance",
+            878      :  "Science Fiction",
+            10770    :  "TV Movie",
+            53       :  "Thriller",
+            37       :  "Western"
+        ]
      
     }
+    
     struct Identifier{
         static let CollectionViewTableViewCell = "CollectionViewTableViewCell"
         static let ShowCollectionViewCell      = "ShowCollectionViewCell"
@@ -97,9 +117,9 @@ struct S{
             
             static let getUpcomingMovies      = "\(baseURL)movie/upcoming?api_key=\(API_KEY)"
             
-            static let getPopularMovies       = "\(baseURL)movie/popular?api_key=\(API_KEY)&language=en-US&page=1"
+            static let getPopularMovies       = "\(baseURL)movie/popular?api_key=\(API_KEY)&language=en-US"
             
-            static let getTopRatedMovies      = "\(baseURL)movie/top_rated?api_key=\(API_KEY)&language=en-US&page=1"
+            static let getTopRatedMovies      = "\(baseURL)movie/top_rated?api_key=\(API_KEY)&language=en-US"
             
             static let getRecentlyAddedMovies = "\(baseURL)discover/movie?api_key=\(API_KEY)&sort_by=release_date.desc&include_adult=false&page=1&year=2023"
 
@@ -115,11 +135,11 @@ struct S{
             
             static let getUpcomingTvShows = "\(baseURL)discover/tv?api_key=\(API_KEY)&include_null_first_air_dates=false&sort_by=first_air_date.desc&first_air_date.gte="
            
-            static let getPopularTvShows  = "\(baseURL)tv/popular?api_key=\(API_KEY)&language=en-US&page=1"
+            static let getPopularTvShows  = "\(baseURL)tv/popular?api_key=\(API_KEY)&language=en-US"
             
-            static let getTopRatedTvShows = "\(baseURL)tv/top_rated?api_key=\(API_KEY)&language=en-US&page=1"
+            static let getTopRatedTvShows = "\(baseURL)tv/top_rated?api_key=\(API_KEY)&language=en-US"
             
-            static let getRecentlyAddedTvShows = "\(baseURL)discover/tv?api_key=\(API_KEY)&page=1&include_null_first_air_dates=false&sort_by=first_air_date.desc&first_air_date.lte="
+            static let getRecentlyAddedTvShows = "\(baseURL)discover/tv?api_key=\(API_KEY)&include_null_first_air_dates=false&sort_by=first_air_date.desc&first_air_date.lte="
             
         }
             

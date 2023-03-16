@@ -8,24 +8,24 @@
 import UIKit
 
 protocol GenresListViewControllerDelegate: AnyObject {
-    func selectedGenresDidChange(genres: Set<Int16>)
+    func selectedGenreDidChange(genre: Int16)
 }
 
 class GenresListViewController: UIViewController {
     
     weak var delegate: GenresListViewControllerDelegate?
 
-    let genres: [Int16: String] = S.genresIndex.genre
+    var genres: [Int16: String] = S.genresIndex.TV_genres
     
-        var selectedGenres = Set<Int16>()
+    var selectedGenre: Int16?
 
-        lazy var tableView: UITableView = {
-            let tableView = UITableView()
-            tableView.dataSource = self
-            tableView.delegate = self
-            tableView.register(GenresTableViewCell.self, forCellReuseIdentifier: S.Identifier.GenreTableViewCell)
-            return tableView
-        }()
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(GenresTableViewCell.self, forCellReuseIdentifier: S.Identifier.GenreTableViewCell)
+        return tableView
+    }()
     
     var closeButton: UIButton = {
         let button = UIButton()
@@ -43,11 +43,11 @@ class GenresListViewController: UIViewController {
         view.addSubview(closeButton)
         exitSetUP()
 
-        }
+    }
     
-   func exitSetUP(){
+    func exitSetUP() {
        
-       //View - Constriants
+       //View - Constraints
        let closeButtonConstraints = [
            closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
            closeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90)
@@ -61,49 +61,50 @@ class GenresListViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-            super.viewDidLayoutSubviews()
-            tableView.frame = view.bounds
-        }
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
     
     @objc private func closeButtonTapped() {
-         delegate?.selectedGenresDidChange(genres: selectedGenres)
-         dismiss(animated: true, completion: nil)
-     }
+        delegate?.selectedGenreDidChange(genre: selectedGenre ?? 0)
+        dismiss(animated: true, completion: nil)
+    }
 }
 
-    extension GenresListViewController: UITableViewDataSource , UITableViewDelegate {
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return genres.count
-        }
-        
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: S.Identifier.GenreTableViewCell, for: indexPath) as? GenresTableViewCell else {
-                return UITableViewCell()
-            }
-            let genre = Array(genres.values)[indexPath.row]
-            cell.configure(with: genre)
-           
-            if selectedGenres.contains(Array(genres.keys)[indexPath.row]) {
-                cell.accessoryType = .checkmark
-            } else {
-                cell.accessoryType = .none
-            }
-            return cell
-        }
-        
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            tableView.deselectRow(at: indexPath, animated: true)
-            let genreKey = Array(genres.keys)[indexPath.row]
-            if selectedGenres.contains(genreKey) {
-                selectedGenres.remove(genreKey)
-            } else {
-                selectedGenres.insert(genreKey)
-            }
-            tableView.reloadData()
-        }
+extension GenresListViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return genres.count
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: S.Identifier.GenreTableViewCell, for: indexPath) as? GenresTableViewCell else {
+            return UITableViewCell()
+        }
+        let genre = Array(genres.values)[indexPath.row]
+        cell.configure(with: genre)
+        
+        if selectedGenre == Array(genres.keys)[indexPath.row] {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let genreKey = Array(genres.keys)[indexPath.row]
+        if selectedGenre == genreKey {
+            selectedGenre = nil
+        } else {
+            selectedGenre = genreKey
+        }
+        tableView.reloadData()
+        closeButtonTapped()
+    }
+}
+
 extension GenresListViewController {
     
     override func viewDidAppear(_ animated: Bool) {

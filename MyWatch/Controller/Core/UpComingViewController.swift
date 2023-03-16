@@ -73,7 +73,7 @@ class UpComingViewController: UIViewController {
     
     private func fetchData(){
         
-        apiCaller.getUpcoming(with: myPage){ [weak self] result in
+        apiCaller.getUpcoming(dataPage: 1, Ganerfilter: -1){ [weak self] result in
             switch result{
             case.success(let shows):
                 
@@ -134,7 +134,7 @@ extension UpComingViewController: UITableViewDelegate, UITableViewDataSource {
          myPage+=1
          if indexPath.row == lastItem {
              // make API call to get more data
-             apiCaller.getUpcoming(with: myPage) { [weak self] result in
+             apiCaller.getUpcoming(dataPage: 1, Ganerfilter: -1){ [weak self] result in
                  switch result {
                  case .success(let shows):
                      if shows.count == 0 {

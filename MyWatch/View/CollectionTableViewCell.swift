@@ -17,6 +17,9 @@ class CollectionTableViewCell: UITableViewCell {
 
     weak var deleagte : CollectionViewTableViewCellDelegate?
 
+    var hasReachedEnd: Bool = false
+
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -50,10 +53,8 @@ class CollectionTableViewCell: UITableViewCell {
              self?.collectionView.reloadData()
          }
     }
-    
+
 }
-
-
 
 
 extension CollectionTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -74,6 +75,7 @@ extension CollectionTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return shows.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         guard collectionView == self.collectionView else { return }
@@ -93,7 +95,14 @@ extension CollectionTableViewCell: UICollectionViewDelegate, UICollectionViewDat
             }
         }
         collectionView.isUserInteractionEnabled = true
-
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+            // check if we're at the last item in the collection view
+            if indexPath.row == collectionView.numberOfItems(inSection: 0) - 1 {
+                // set the flag to indicate that we've reached the end
+                hasReachedEnd = true
+            }
+        }
+
 }

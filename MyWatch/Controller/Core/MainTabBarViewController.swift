@@ -12,8 +12,9 @@ import RxSwift
 class MainTabBarViewController: UITabBarController {
     
     let showMoviesSubject = PublishSubject<Bool>()
-    let selectedGenresSubject = PublishSubject<Set<Int16>>()
-    var selectedGenres = Set<Int16>()
+    var showMovies : Bool = true
+    let selectedGenreSubject = PublishSubject<Int16>()
+    var selectedGenre: Int16 = 0 // default to no genre selected
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -53,10 +54,9 @@ class MainTabBarViewController: UITabBarController {
         
         setViewControllers([vc1, vc2, vc3, vc4], animated: true)
         
-        selectedGenresSubject
-                    .subscribe(onNext: { [weak self] genres in
-                        self?.selectedGenres = genres
-                        print("Selected genres: \(genres)")
+        selectedGenreSubject
+                    .subscribe(onNext: { [weak self] genre in
+                        self?.selectedGenre = genre
                     })
                     .disposed(by: disposeBag)
         
@@ -92,7 +92,7 @@ class MainTabBarViewController: UITabBarController {
                           action  :   nil
         )
         let checkBoxBtn =
-        UIBarButtonItem ( title:     "Categories",
+        UIBarButtonItem ( title:     "Category",
                           style:     .plain,
                           target:    self,
                           action:    #selector(showCheckBoxView)
@@ -117,10 +117,12 @@ class MainTabBarViewController: UITabBarController {
     }
     
     @objc private func showMoviesAction() {
+        showMovies = true
         showMoviesSubject.onNext(true)
     }
     
     @objc private func showTVShowsAction() {
+        showMovies = false
         showMoviesSubject.onNext(false)
     }
     
@@ -130,14 +132,29 @@ class MainTabBarViewController: UITabBarController {
     }
     
     @objc private func showCheckBoxView() {
-        let genresCheckBoxView = GenresListViewController()
-        genresCheckBoxView.delegate = self
-        navigationController?.present(genresCheckBoxView, animated: true)
+        let genresListViewController = GenresListViewController()
+        var genres: [Int16: String] = S.genresIndex.TV_genres
+        
+        if !showMovies{
+            
+            genres = S.genresIndex.TV_genres
+        }
+        
+        else{
+            genres = S.genresIndex.Movie_genres
+        }
+                
+      
+           
+                      
+        genresListViewController.delegate = self
+        genresListViewController.genres = genres
+        navigationController?.present(genresListViewController, animated: true)
     }
 }
 extension MainTabBarViewController: GenresListViewControllerDelegate {
-    func selectedGenresDidChange(genres: Set<Int16>) {
-        selectedGenres = genres
-        selectedGenresSubject.onNext(genres)
+    func selectedGenreDidChange(genre: Int16) {
+        selectedGenre = genre
+        selectedGenreSubject.onNext(genre)
     }
 }
