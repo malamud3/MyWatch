@@ -20,6 +20,8 @@ target 'MyWatch' do
 
   pod 'SVGKit'
   
+  pod 'YouTubePlayer'
+
   
   target 'MyWatchTests' do
     inherit! :search_paths

@@ -104,17 +104,17 @@ class MainTabBarViewController: UITabBarController {
             tvShowsBtn
         ]
         
-        //SFsymbols
         navigationItem.rightBarButtonItems = [
             
             profileMangerBtn,
             checkBoxBtn
         ]
         
-        navigationController?.navigationBar.tintColor = UIColor(named: "Color_Main")
-        
-        
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = .systemBackground
+
     }
+    
     
     @objc private func showMoviesAction() {
         showMovies = true

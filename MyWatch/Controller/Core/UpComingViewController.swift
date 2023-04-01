@@ -13,7 +13,9 @@ import RxSwift
 class UpComingViewController: UIViewController {
     
     private var apiCaller  : APICaller_Show = APICaller_Movie.shared
+    private var selectedGenre: Int16 = -1
 
+    
     private var shows:[upComingShow] = [upComingShow]()
 
     private var showMovies  = true
@@ -53,10 +55,8 @@ class UpComingViewController: UIViewController {
                 switch self?.showMovies {
                 case true:
                     self?.apiCaller = APICaller_Movie.shared
-                    self?.myPage = 1
                 case false:
                     self?.apiCaller = APICaller_TV.shared
-                    self?.myPage = 1
                 case .none:
                     self?.apiCaller = APICaller_Movie.shared
                 case .some(_):
@@ -66,6 +66,7 @@ class UpComingViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         upcomingTable.frame = view.bounds
@@ -73,7 +74,7 @@ class UpComingViewController: UIViewController {
     
     private func fetchData(){
         
-        apiCaller.getUpcoming(dataPage: 1, Ganerfilter: -1){ [weak self] result in
+        apiCaller.getUpcoming(dataPage: myPage, Ganerfilter: selectedGenre){ [weak self] result in
             switch result{
             case.success(let shows):
                 
@@ -89,26 +90,28 @@ class UpComingViewController: UIViewController {
         }
     }
     
-    func filterShows(_ shows: [upComingShow]) -> [upComingShow] {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let calendar = Calendar.current
-        
-        return shows.filter { show in
-            guard let firstAirDateString = show.first_air_date,
-                  let firstAirDate = formatter.date(from: firstAirDateString) else {
+    private func filterShows(_ shows: [upComingShow]) -> [upComingShow] {
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let sortedShows = shows.sorted { (show1, show2) -> Bool in
+            guard let date1 = show1.first_air_date, let date2 = show2.first_air_date,
+                  let show1Date = dateFormatter.date(from: date1),
+                  let show2Date = dateFormatter.date(from: date2) else {
                 return false
             }
-            let day = calendar.component(.day, from: firstAirDate)
-            let month = calendar.component(.month, from: firstAirDate)
-            let year = calendar.component(.year, from: firstAirDate)
-            let today = calendar.component(.day, from: Date())
-            let currentMonth = calendar.component(.month, from: Date())
-            let currentYear = calendar.component(.year, from: Date())
-            return show.poster_path != nil &&
-             year >= currentYear && month >= currentMonth && day >= today
+            return show1Date < show2Date
         }
-    }
+        let filteredShows = sortedShows.filter { (show) -> Bool in
+               guard let date = show.first_air_date,
+                     let showDate = dateFormatter.date(from: date),
+                     let posterPath = show.poster_path else {
+                   return false
+               }
+               return showDate >= currentDate && !posterPath.isEmpty
+           }
+           return filteredShows
+       }
 }
 
 extension UpComingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -134,7 +137,7 @@ extension UpComingViewController: UITableViewDelegate, UITableViewDataSource {
          myPage+=1
          if indexPath.row == lastItem {
              // make API call to get more data
-             apiCaller.getUpcoming(dataPage: 1, Ganerfilter: -1){ [weak self] result in
+             apiCaller.getUpcoming(dataPage: myPage, Ganerfilter: -1){ [weak self] result in
                  switch result {
                  case .success(let shows):
                      if shows.count == 0 {

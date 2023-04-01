@@ -52,7 +52,7 @@ class APICaller_Movie: APICaller_Show{
             urlString += "&with_genres=\(MyGaner)"
         }
         guard let url = URL(string: urlString) else { return }
-
+        print(url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else{
                 return

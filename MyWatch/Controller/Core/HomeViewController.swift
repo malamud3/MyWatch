@@ -21,8 +21,9 @@ enum whatData: Int{
 class HomeViewController: UIViewController {
     
     private var apiCaller  : APICaller_Show = APICaller_Movie.shared
-    private var selectedGenre: Int16 = 18
+    private var selectedGenre: Int16 = -1
 
+    
     private var showMovies = true
     private var disposeBag = DisposeBag()
     
@@ -64,10 +65,13 @@ class HomeViewController: UIViewController {
                     switch self?.showMovies {
                     case true:
                         self?.apiCaller = APICaller_Movie.shared
+                        self?.selectedGenre = -1
                     case false:
                         self?.apiCaller = APICaller_TV.shared
+                        self?.selectedGenre = -1
                     case .none:
                         self?.apiCaller = APICaller_Movie.shared
+                        self?.selectedGenre = -1
                     case .some(_):
                         break
                     }
@@ -80,7 +84,6 @@ class HomeViewController: UIViewController {
         (self.tabBarController as? MainTabBarViewController)?.selectedGenreSubject
             .subscribe(onNext: { [weak self] genre in
                 self?.selectedGenre = genre
-                print("\n\n\(String(describing: self?.selectedGenre))\n\n")
                 self?.updateUI()
             })
             .disposed(by: disposeBag)
@@ -98,8 +101,7 @@ class HomeViewController: UIViewController {
             case .success(let shows):
                 let filteredShows = shows.filter {
                     if $0.poster_path != nil {
-                            let showGenres = $0.genre_ids
-                            return showGenres.contains(Int(selectedGenre))
+                            return true
                     }
                     return false
                 }

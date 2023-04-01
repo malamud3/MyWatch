@@ -25,7 +25,6 @@ class APICaller_TV: APICaller_Show{
         }
         guard let url = URL(string: urlString) else { return }
         
-        
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
                 return
@@ -35,6 +34,7 @@ class APICaller_TV: APICaller_Show{
                 completion(.success(results.results))
                 
             } catch{
+                
                 completion(.failure(APIError.failledTogetData))
             }
         }
@@ -107,7 +107,7 @@ class APICaller_TV: APICaller_Show{
             urlString += "&with_genres=\(MyGaner)"
         }
         guard let url = URL(string: urlString) else { return }
-        
+        print(url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
                 return

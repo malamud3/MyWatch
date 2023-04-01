@@ -25,21 +25,7 @@ class showTrailerViewController: UIViewController {
         label.font = .systemFont(ofSize: 18, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "This is the best movie ever!"
         return label
-    }()
-    
-    private let dowmloadBtn: UIButton = {
-       
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .red
-        button.setTitle("Download", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8
-        button.layer.masksToBounds = true
-        
-        return button
     }()
     
     private let webView: WKWebView = {
@@ -54,11 +40,9 @@ class showTrailerViewController: UIViewController {
         view.addSubview(webView)
         view.addSubview(showLabel)
         view.addSubview(overviewLabel)
-        view.addSubview(dowmloadBtn)
         
         configureConstraints()
-        
-        
+  
     }
     
 
@@ -82,17 +66,11 @@ class showTrailerViewController: UIViewController {
             overviewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         
-        let dowmloadBtnConstraints = [
-            dowmloadBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dowmloadBtn.topAnchor.constraint(equalTo: overviewLabel.bottomAnchor, constant: 25),
-            dowmloadBtn.widthAnchor.constraint(equalToConstant: 140),
-            dowmloadBtn.heightAnchor.constraint(equalToConstant: 40)
-        ]
+   
         
         NSLayoutConstraint.activate(webViewConstraints)
         NSLayoutConstraint.activate(showLabelConstraints)
         NSLayoutConstraint.activate(overviewLabelConstraints)
-        NSLayoutConstraint.activate(dowmloadBtnConstraints)
         
     }
     

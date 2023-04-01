@@ -86,7 +86,6 @@ class HeaderUiView: UIView {
         addSubview(btn_addToList)
         addSubview(btn_info)
 
-        
         addGradient()
         
         applyConstraints()
@@ -95,36 +94,28 @@ class HeaderUiView: UIView {
     required init?(coder: NSCoder){
         fatalError()
     }
-
     
     // constrains
     private func applyConstraints() {
         
-   
         let btnInfoConstraints = [
-            btn_info.trailingAnchor.constraint(equalTo: btn_play.leadingAnchor, constant: -30),
-            btn_info.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            btn_info.trailingAnchor.constraint (equalTo: btn_play.leadingAnchor, constant: -30),
+            btn_info.bottomAnchor.constraint   (equalTo: bottomAnchor, constant: -10),
         ]
         
         
         let playButtonConstraints = [
-            btn_play.centerXAnchor.constraint(equalTo: centerXAnchor),
-            btn_play.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            btn_play.heightAnchor.constraint(equalToConstant: 20),
-            btn_play.widthAnchor.constraint(equalToConstant: 100)
-
+            btn_play.centerXAnchor.constraint  (equalTo: centerXAnchor),
+            btn_play.bottomAnchor.constraint   (equalTo: bottomAnchor, constant: -10),
+            btn_play.heightAnchor.constraint   (equalToConstant: 20),
+            btn_play.widthAnchor.constraint    (equalToConstant: 100)
         ]
-        
         
         let addToListButtonConstraints = [
-            
-            btn_addToList.leadingAnchor.constraint(equalTo: btn_play.trailingAnchor, constant: 30),
-            btn_addToList.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-
-            
+            btn_addToList.leadingAnchor.constraint (equalTo: btn_play.trailingAnchor, constant: 30),
+            btn_addToList.bottomAnchor.constraint  (equalTo: bottomAnchor, constant: -10),
         ]
         
- 
         NSLayoutConstraint.activate(btnInfoConstraints)
         NSLayoutConstraint.activate(playButtonConstraints)
         NSLayoutConstraint.activate(addToListButtonConstraints)
