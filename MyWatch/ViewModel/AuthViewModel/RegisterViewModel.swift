@@ -16,7 +16,8 @@ enum RegistrationMethod {
 class RegistrationViewModel {
     
     // MARK: - Properties
-    
+    private let registerManager = RegistrationManager()
+
     var model: RegistrationModel
     
     // MARK: - Initialization
@@ -38,25 +39,21 @@ class RegistrationViewModel {
         }
     }
     
-    private func registerWithPhoneNumber(completion: @escaping (Bool, String?) -> Void) {
-        guard let phoneNumber = model.phoneNumber else {
-            completion(false, "Please enter a valid phone number.")
-            return
-        }
-        
-        // Configure Firebase Auth
-        let auth = Auth.auth()
-        auth.languageCode = Locale.current.languageCode
-        
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
-            if let error = error {
-                completion(false, error.localizedDescription)
-            } else if let verificationID = verificationID {
-                self.model.verificationCode = verificationID
-                completion(true, nil)
+    func registerWithPhoneNumber(completion: @escaping (Bool, String?) -> Void) {
+            guard let phoneNumber = model.phoneNumber else {
+                completion(false, "Please enter a valid phone number.")
+                return
+            }
+            
+            registerManager.verifyPhoneNumber(phoneNumber: phoneNumber) { success, verificationID in
+                if success, let verificationID = verificationID {
+                    self.model.verificationCode = verificationID
+                    completion(true, nil)
+                } else {
+                    completion(false, "Failed to register with phone number.")
+                }
             }
         }
-    }
     
     private func registerWithAppleID(completion: @escaping (Bool, String?) -> Void) {
         guard let credential = self.model.appleCredential else {
@@ -66,7 +63,7 @@ class RegistrationViewModel {
         
         // Configure Firebase Auth
         let auth = Auth.auth()
-        auth.languageCode = Locale.current.languageCode
+        auth.languageCode = Locale.current.language.languageCode?.identifier
         
         auth.signIn(with: credential) { authResult, error in
             if let error = error {
@@ -86,7 +83,7 @@ class RegistrationViewModel {
         
         // Configure Firebase Auth
         let auth = Auth.auth()
-        auth.languageCode = Locale.current.languageCode
+        auth.languageCode = Locale.current.language.languageCode?.identifier
         
         auth.signIn(with: credential) { authResult, error in
             if let error = error {
@@ -97,4 +94,5 @@ class RegistrationViewModel {
             }
         }
     }
+    
 }

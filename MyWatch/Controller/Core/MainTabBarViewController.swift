@@ -127,8 +127,8 @@ class MainTabBarViewController: UITabBarController {
     }
     
     @objc private func handleLogin() {
-        let loginVC = LoginViewController()
-        navigationController?.pushViewController(loginVC, animated: true)
+        let regVC = RegisterViewController()
+        navigationController?.pushViewController(regVC, animated: true)
     }
     
     @objc private func showCheckBoxView() {
@@ -144,9 +144,7 @@ class MainTabBarViewController: UITabBarController {
             genres = S.genresIndex.Movie_genres
         }
                 
-      
-           
-                      
+         
         genresListViewController.delegate = self
         genresListViewController.genres = genres
         navigationController?.present(genresListViewController, animated: true)

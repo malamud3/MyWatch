@@ -83,6 +83,9 @@ struct S{
     
     struct picName{
         static let Logo = "Logo"
+        static let Icon_apple = "Icon_apple"
+        static let Icon_google = "Icon_google"
+
     }
     
     struct HomeView_sectionTitles{

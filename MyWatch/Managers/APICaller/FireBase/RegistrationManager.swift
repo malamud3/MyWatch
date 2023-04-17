@@ -21,12 +21,22 @@ class RegistrationManager {
             }
         }
     }
-    
+    func verifyPhoneNumber(phoneNumber: String, completion: @escaping (Bool, String?) -> Void) {
+            PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+                if let error = error {
+                    completion(false, error.localizedDescription)
+                } else if let verificationID = verificationID {
+                    // Do something with verification ID
+                    completion(true, verificationID)
+                }
+            }
+        }
     // MARK: - Apple Registration
     
     func register(withAppleIDCredential credential: ASAuthorizationAppleIDCredential, completion: @escaping (Bool, Error?) -> Void) {
         let idToken = String(data: credential.identityToken!, encoding: .utf8)!
-        let nonce = credential.nonce
+        let nonce = UUID().uuidString
+        
         let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idToken, rawNonce: nonce)
         
         Auth.auth().signIn(with: firebaseCredential) { authResult, error in

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		62D08E62D5347DA051F2F14C /* Pods_MyWatch_MyWatchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 543A3B6E5D34323696953336 /* Pods_MyWatch_MyWatchUITests.framework */; };
-		6F78B8B7984EC2DF08F00F5B /* Pods_MyWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FDA302C3C147982036A9F6B /* Pods_MyWatch.framework */; };
-		7D1ABDC53E387775578A0374 /* Pods_MyWatchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB1D1834CD0407121EDA8A3 /* Pods_MyWatchTests.framework */; };
+		0D0A30B89DA5E594C9905CED /* Pods_MyWatch_MyWatchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50647ACCD12A4DA7BE9A951F /* Pods_MyWatch_MyWatchUITests.framework */; };
+		9FF23DB4F10621E759B69619 /* Pods_MyWatchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AF8ACF873AA5C551FE0925 /* Pods_MyWatchTests.framework */; };
+		A640C6D5F8CF793A484FE3B4 /* Pods_MyWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65B0690D81ABAA1834C7756 /* Pods_MyWatch.framework */; };
 		A925CC4F298C3564001213BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CC4E298C3564001213BE /* AppDelegate.swift */; };
 		A925CC51298C3564001213BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CC50298C3564001213BE /* SceneDelegate.swift */; };
 		A925CC58298C3566001213BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A925CC57298C3566001213BE /* Assets.xcassets */; };
@@ -72,12 +72,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1EB1D1834CD0407121EDA8A3 /* Pods_MyWatchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWatchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1FDA302C3C147982036A9F6B /* Pods_MyWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DCFFDBC46F1F40BE2018FE7 /* Pods-MyWatchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatchTests.debug.xcconfig"; path = "Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests.debug.xcconfig"; sourceTree = "<group>"; };
-		456F25DA169F0C985FF4C613 /* Pods-MyWatchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatchTests.release.xcconfig"; path = "Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests.release.xcconfig"; sourceTree = "<group>"; };
-		4C4138222D5676F9480568A1 /* Pods-MyWatch-MyWatchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatch-MyWatchUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyWatch-MyWatchUITests/Pods-MyWatch-MyWatchUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		543A3B6E5D34323696953336 /* Pods_MyWatch_MyWatchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWatch_MyWatchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E2875D1490B0A20E8CB5FF7 /* Pods-MyWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatch.debug.xcconfig"; path = "Target Support Files/Pods-MyWatch/Pods-MyWatch.debug.xcconfig"; sourceTree = "<group>"; };
+		18C002ED29E278AEFE0CE3DD /* Pods-MyWatchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatchTests.release.xcconfig"; path = "Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests.release.xcconfig"; sourceTree = "<group>"; };
+		3154FD5D46821170D0F4051B /* Pods-MyWatch-MyWatchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatch-MyWatchUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyWatch-MyWatchUITests/Pods-MyWatch-MyWatchUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		50647ACCD12A4DA7BE9A951F /* Pods_MyWatch_MyWatchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWatch_MyWatchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6659D34481003E8BB3D13C2E /* Pods-MyWatch-MyWatchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatch-MyWatchUITests.release.xcconfig"; path = "Target Support Files/Pods-MyWatch-MyWatchUITests/Pods-MyWatch-MyWatchUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A91E40C429E5A16D00A39071 /* MyWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyWatch.entitlements; sourceTree = "<group>"; };
 		A925CC4B298C3564001213BE /* MyWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A925CC4E298C3564001213BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A925CC50298C3564001213BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,9 +124,10 @@
 		A9A07438298D1D08004799FD /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		A9A0743C298D1F98004799FD /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		A9F9DCC3299E39E4000211F7 /* GenresTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresTableViewCell.swift; sourceTree = "<group>"; };
-		ABD76C78A01C61821C59D6B8 /* Pods-MyWatch-MyWatchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatch-MyWatchUITests.release.xcconfig"; path = "Target Support Files/Pods-MyWatch-MyWatchUITests/Pods-MyWatch-MyWatchUITests.release.xcconfig"; sourceTree = "<group>"; };
-		E3A4DD3045B79BDBAC79D36C /* Pods-MyWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatch.release.xcconfig"; path = "Target Support Files/Pods-MyWatch/Pods-MyWatch.release.xcconfig"; sourceTree = "<group>"; };
-		F3CD6C6403209CD5BCF80FFD /* Pods-MyWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatch.debug.xcconfig"; path = "Target Support Files/Pods-MyWatch/Pods-MyWatch.debug.xcconfig"; sourceTree = "<group>"; };
+		C65B0690D81ABAA1834C7756 /* Pods_MyWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6AF8ACF873AA5C551FE0925 /* Pods_MyWatchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWatchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC0358EC4570818582A21A60 /* Pods-MyWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatch.release.xcconfig"; path = "Target Support Files/Pods-MyWatch/Pods-MyWatch.release.xcconfig"; sourceTree = "<group>"; };
+		DEFBEA0A716996481465C749 /* Pods-MyWatchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWatchTests.debug.xcconfig"; path = "Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F78B8B7984EC2DF08F00F5B /* Pods_MyWatch.framework in Frameworks */,
+				A640C6D5F8CF793A484FE3B4 /* Pods_MyWatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D1ABDC53E387775578A0374 /* Pods_MyWatchTests.framework in Frameworks */,
+				9FF23DB4F10621E759B69619 /* Pods_MyWatchTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,34 +151,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62D08E62D5347DA051F2F14C /* Pods_MyWatch_MyWatchUITests.framework in Frameworks */,
+				0D0A30B89DA5E594C9905CED /* Pods_MyWatch_MyWatchUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F577FB3D82A9522AE37F8D3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C65B0690D81ABAA1834C7756 /* Pods_MyWatch.framework */,
+				50647ACCD12A4DA7BE9A951F /* Pods_MyWatch_MyWatchUITests.framework */,
+				D6AF8ACF873AA5C551FE0925 /* Pods_MyWatchTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		54F695492A3CEA704D7320BE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F3CD6C6403209CD5BCF80FFD /* Pods-MyWatch.debug.xcconfig */,
-				E3A4DD3045B79BDBAC79D36C /* Pods-MyWatch.release.xcconfig */,
-				4C4138222D5676F9480568A1 /* Pods-MyWatch-MyWatchUITests.debug.xcconfig */,
-				ABD76C78A01C61821C59D6B8 /* Pods-MyWatch-MyWatchUITests.release.xcconfig */,
-				3DCFFDBC46F1F40BE2018FE7 /* Pods-MyWatchTests.debug.xcconfig */,
-				456F25DA169F0C985FF4C613 /* Pods-MyWatchTests.release.xcconfig */,
+				0E2875D1490B0A20E8CB5FF7 /* Pods-MyWatch.debug.xcconfig */,
+				DC0358EC4570818582A21A60 /* Pods-MyWatch.release.xcconfig */,
+				3154FD5D46821170D0F4051B /* Pods-MyWatch-MyWatchUITests.debug.xcconfig */,
+				6659D34481003E8BB3D13C2E /* Pods-MyWatch-MyWatchUITests.release.xcconfig */,
+				DEFBEA0A716996481465C749 /* Pods-MyWatchTests.debug.xcconfig */,
+				18C002ED29E278AEFE0CE3DD /* Pods-MyWatchTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		79D6F6895D954239759ECB04 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1FDA302C3C147982036A9F6B /* Pods_MyWatch.framework */,
-				543A3B6E5D34323696953336 /* Pods_MyWatch_MyWatchUITests.framework */,
-				1EB1D1834CD0407121EDA8A3 /* Pods_MyWatchTests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A925CC42298C3564001213BE = {
@@ -188,7 +189,7 @@
 				A925CC6E298C3566001213BE /* MyWatchUITests */,
 				A925CC4C298C3564001213BE /* Products */,
 				54F695492A3CEA704D7320BE /* Pods */,
-				79D6F6895D954239759ECB04 /* Frameworks */,
+				2F577FB3D82A9522AE37F8D3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -205,6 +206,7 @@
 		A925CC4D298C3564001213BE /* MyWatch */ = {
 			isa = PBXGroup;
 			children = (
+				A91E40C429E5A16D00A39071 /* MyWatch.entitlements */,
 				A925CC5C298C3566001213BE /* Info.plist */,
 				A92E4D3D298D2B8B00F57FD1 /* GoogleService-Info.plist */,
 				A925CC57298C3566001213BE /* Assets.xcassets */,
@@ -401,11 +403,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A925CC75298C3566001213BE /* Build configuration list for PBXNativeTarget "MyWatch" */;
 			buildPhases = (
-				4E51CC065536C1729B14855D /* [CP] Check Pods Manifest.lock */,
+				EBECCD0ABF4FB53C494E3B2D /* [CP] Check Pods Manifest.lock */,
 				A925CC47298C3564001213BE /* Sources */,
 				A925CC48298C3564001213BE /* Frameworks */,
 				A925CC49298C3564001213BE /* Resources */,
-				6C086CCC31C17D203E8DAF67 /* [CP] Embed Pods Frameworks */,
+				5E07A165C276DCD259CDF51E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -420,11 +422,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A925CC78298C3566001213BE /* Build configuration list for PBXNativeTarget "MyWatchTests" */;
 			buildPhases = (
-				8DA01A91266582B912B0F6AB /* [CP] Check Pods Manifest.lock */,
+				14C82F22268A11CA58003494 /* [CP] Check Pods Manifest.lock */,
 				A925CC5D298C3566001213BE /* Sources */,
 				A925CC5E298C3566001213BE /* Frameworks */,
 				A925CC5F298C3566001213BE /* Resources */,
-				E0EDD70CF2B6C89C7942B41C /* [CP] Embed Pods Frameworks */,
+				C9A43733404399C1D7043A2E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -440,11 +442,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A925CC7B298C3566001213BE /* Build configuration list for PBXNativeTarget "MyWatchUITests" */;
 			buildPhases = (
-				C3963FDCF3102129944EA7B1 /* [CP] Check Pods Manifest.lock */,
+				DE8486AC28E902D367124C1B /* [CP] Check Pods Manifest.lock */,
 				A925CC67298C3566001213BE /* Sources */,
 				A925CC68298C3566001213BE /* Frameworks */,
 				A925CC69298C3566001213BE /* Resources */,
-				49529809740F399E373169D4 /* [CP] Embed Pods Frameworks */,
+				8BC6AFD124518232D2E6C093 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -527,63 +529,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		49529809740F399E373169D4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyWatch-MyWatchUITests/Pods-MyWatch-MyWatchUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyWatch-MyWatchUITests/Pods-MyWatch-MyWatchUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyWatch-MyWatchUITests/Pods-MyWatch-MyWatchUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4E51CC065536C1729B14855D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MyWatch-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6C086CCC31C17D203E8DAF67 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyWatch/Pods-MyWatch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyWatch/Pods-MyWatch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyWatch/Pods-MyWatch-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8DA01A91266582B912B0F6AB /* [CP] Check Pods Manifest.lock */ = {
+		14C82F22268A11CA58003494 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -605,7 +551,58 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C3963FDCF3102129944EA7B1 /* [CP] Check Pods Manifest.lock */ = {
+		5E07A165C276DCD259CDF51E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyWatch/Pods-MyWatch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyWatch/Pods-MyWatch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyWatch/Pods-MyWatch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BC6AFD124518232D2E6C093 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyWatch-MyWatchUITests/Pods-MyWatch-MyWatchUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyWatch-MyWatchUITests/Pods-MyWatch-MyWatchUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyWatch-MyWatchUITests/Pods-MyWatch-MyWatchUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9A43733404399C1D7043A2E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE8486AC28E902D367124C1B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -627,21 +624,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E0EDD70CF2B6C89C7942B41C /* [CP] Embed Pods Frameworks */ = {
+		EBECCD0ABF4FB53C494E3B2D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyWatch-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyWatchTests/Pods-MyWatchTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -850,10 +852,11 @@
 		};
 		A925CC76298C3566001213BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3CD6C6403209CD5BCF80FFD /* Pods-MyWatch.debug.xcconfig */;
+			baseConfigurationReference = 0E2875D1490B0A20E8CB5FF7 /* Pods-MyWatch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyWatch/MyWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C53P78KWXA;
@@ -879,10 +882,11 @@
 		};
 		A925CC77298C3566001213BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3A4DD3045B79BDBAC79D36C /* Pods-MyWatch.release.xcconfig */;
+			baseConfigurationReference = DC0358EC4570818582A21A60 /* Pods-MyWatch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyWatch/MyWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C53P78KWXA;
@@ -908,7 +912,7 @@
 		};
 		A925CC79298C3566001213BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DCFFDBC46F1F40BE2018FE7 /* Pods-MyWatchTests.debug.xcconfig */;
+			baseConfigurationReference = DEFBEA0A716996481465C749 /* Pods-MyWatchTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -929,7 +933,7 @@
 		};
 		A925CC7A298C3566001213BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 456F25DA169F0C985FF4C613 /* Pods-MyWatchTests.release.xcconfig */;
+			baseConfigurationReference = 18C002ED29E278AEFE0CE3DD /* Pods-MyWatchTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -950,7 +954,7 @@
 		};
 		A925CC7C298C3566001213BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4C4138222D5676F9480568A1 /* Pods-MyWatch-MyWatchUITests.debug.xcconfig */;
+			baseConfigurationReference = 3154FD5D46821170D0F4051B /* Pods-MyWatch-MyWatchUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -969,7 +973,7 @@
 		};
 		A925CC7D298C3566001213BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ABD76C78A01C61821C59D6B8 /* Pods-MyWatch-MyWatchUITests.release.xcconfig */;
+			baseConfigurationReference = 6659D34481003E8BB3D13C2E /* Pods-MyWatch-MyWatchUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

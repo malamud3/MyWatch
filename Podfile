@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+# platform :ios, '13.0'
 
 target 'MyWatch' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -22,7 +22,8 @@ target 'MyWatch' do
   
   pod 'YouTubePlayer'
 
-  
+  pod 'SnapKit'
+
   target 'MyWatchTests' do
     inherit! :search_paths
     pod 'RxBlocking'
