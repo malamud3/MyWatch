@@ -10,7 +10,7 @@ import Foundation
 
 
 //Genral
-struct Show: Codable {
+struct Show: Codable, Hashable {
     
     let id: Int
     let original_name: String?
@@ -22,6 +22,13 @@ struct Show: Codable {
     let vote_average: Double
     let genre_ids: [Int]
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: Show, rhs: Show) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 //Main Page -> recently Added Movie

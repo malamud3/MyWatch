@@ -10,6 +10,8 @@ target 'MyWatch' do
 
   pod 'GoogleAPIClientForREST/YouTube'
   pod 'GoogleSignIn'
+  pod 'GoogleSignInSwift'
+  
 
   pod 'FirebaseAnalytics'
   pod 'FirebaseAuth'
@@ -17,17 +19,14 @@ target 'MyWatch' do
 
   pod 'RxSwift'
   pod 'RxCocoa'
-
+  
   pod 'SVGKit'
   
-  pod 'YouTubePlayer'
-
-  pod 'SnapKit'
-
+  pod 'MaterialComponents'
+  
   target 'MyWatchTests' do
     inherit! :search_paths
-    pod 'RxBlocking'
-    pod 'RxTest'
+ 
     
   end
 

@@ -1,0 +1,21 @@
+
+<svg width="363px" height="77.1002634px" viewBox="0 0 363 77.1002634" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50.2472701%" id="linearGradient-mqtkig3r3i-1">
+            <stop stop-color="#4EA6FF" offset="0%"></stop>
+            <stop stop-color="#4EDDFE" offset="100%"></stop>
+        </linearGradient>
+        <path d="M28,586 L347,586 C351.418278,586 355,589.581722 355,594 L355,627.100263 C355,631.518541 351.418278,635.100263 347,635.100263 L28,635.100263 C23.581722,635.100263 20,631.518541 20,627.100263 L20,594 C20,589.581722 23.581722,586 28,586 Z" id="path-mqtkig3r3i-2"></path>
+        <filter x="-7.2%" y="-36.7%" width="114.3%" height="197.8%" filterUnits="objectBoundingBox" id="filter-mqtkig3r3i-3">
+            <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.797724185   0 0 0 0 1  0 0 0 0.522927989 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle-Copy" transform="translate(-6.000000, -578.000000)">
+            <use fill="black" fill-opacity="1" filter="url(#filter-mqtkig3r3i-3)" xlink:href="#path-mqtkig3r3i-2"></use>
+            <use fill="url(#linearGradient-mqtkig3r3i-1)" fill-rule="evenodd" xlink:href="#path-mqtkig3r3i-2"></use>
+        </g>
+    </g>
+</svg>

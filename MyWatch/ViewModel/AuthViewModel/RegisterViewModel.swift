@@ -5,94 +5,116 @@
 //  Created by Amir Malamud on 03/02/2023.
 //
 
+import AuthenticationServices
+import FirebaseCore
 import FirebaseAuth
-
-enum RegistrationMethod {
-    case phone
-    case apple
-    case google
-}
+import GoogleSignIn
 
 class RegistrationViewModel {
     
     // MARK: - Properties
-    private let registerManager = RegistrationManager()
-
-    var model: RegistrationModel
+    let registrationManager: RegistrationManager
+    
+    var model: User
+    
+    typealias AuthResult = Result<AuthDataResult, Error>
+    typealias AuthCompletion = (_ result: AuthResult) -> Void
     
     // MARK: - Initialization
     
-    init(model: RegistrationModel) {
+    init(model: User, registrationManager: RegistrationManager) {
         self.model = model
+        self.registrationManager = registrationManager
     }
     
     // MARK: - Actions
     
-    func register(with method: RegistrationMethod, completion: @escaping (Bool, String?) -> Void) {
+    func register(with method: AuthMethod, completion: @escaping (Bool, String?) -> Void) async throws  {
         switch method {
         case .phone:
-            registerWithPhoneNumber(completion: completion)
-        case .apple:
-            registerWithAppleID(completion: completion)
+            try await registerWithPhoneNumber(completion: completion)
+        case .apple: break
+            //    registerWithAppleID(completion: completion)
         case .google:
-            registerWithGoogle(completion: completion)
+            try await registerWithGoogle(completion: completion)
+        case .sms:
+            try await verifyPhoneNumber(completion: completion)
         }
     }
     
-    func registerWithPhoneNumber(completion: @escaping (Bool, String?) -> Void) {
-            guard let phoneNumber = model.phoneNumber else {
-                completion(false, "Please enter a valid phone number.")
-                return
-            }
-            
-            registerManager.verifyPhoneNumber(phoneNumber: phoneNumber) { success, verificationID in
-                if success, let verificationID = verificationID {
-                    self.model.verificationCode = verificationID
-                    completion(true, nil)
-                } else {
-                    completion(false, "Failed to register with phone number.")
-                }
-            }
-        }
-    
-    private func registerWithAppleID(completion: @escaping (Bool, String?) -> Void) {
-        guard let credential = self.model.appleCredential else {
-            completion(false, "Missing Apple credential.")
+    func registerWithPhoneNumber(completion: @escaping (Bool, String?) -> Void) async throws {
+        guard let phoneNumber = model.phoneNumber, !phoneNumber.isEmpty else {
+            completion(false, "Please enter a valid phone number.")
             return
         }
-        
-        // Configure Firebase Auth
-        let auth = Auth.auth()
-        auth.languageCode = Locale.current.language.languageCode?.identifier
-        
-        auth.signIn(with: credential) { authResult, error in
-            if let error = error {
-                completion(false, error.localizedDescription)
-            } else if authResult?.user != nil {
-                // Handle new user registration
+        registrationManager.register(withPhoneNumber: phoneNumber){ result in
+            switch result {
+            case .success:
+                print("ALL GOOD")
                 completion(true, nil)
+            case .failure(let error):
+                completion(false, error.localizedDescription)
             }
         }
     }
     
-    private func registerWithGoogle(completion: @escaping (Bool, String?) -> Void) {
-        guard let credential = self.model.googleCredential else {
-            completion(false, "Missing Google credential.")
+    func verifyPhoneNumber(completion: @escaping (Bool, String?) -> Void) async throws{
+        
+        guard let verificationCode = registrationManager.verificationCode else {
+            completion(false, "Please enter a valid phone number.")
             return
         }
-        
-        // Configure Firebase Auth
-        let auth = Auth.auth()
-        auth.languageCode = Locale.current.language.languageCode?.identifier
-        
-        auth.signIn(with: credential) { authResult, error in
-            if let error = error {
-                completion(false, error.localizedDescription)
-            } else if authResult?.user != nil {
-                // Handle new user registration
+        registrationManager.verifyPhoneNumber(verificationCode: verificationCode) { result in
+            switch result {
+            case .success:
                 completion(true, nil)
+            case .failure(let error):
+                completion(false, error.localizedDescription)
             }
         }
     }
     
+    
+    
+    
+    func registerWithGoogle(completion: @escaping (Bool, String?) -> Void) async throws {
+        
+        // Configure Google Sign-In
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+        
+        let scenes = await UIApplication.shared.connectedScenes
+        let windowScenes = scenes.first as? UIWindowScene
+        let window = await windowScenes?.windows.first
+        guard let rootViewController = await window?.rootViewController else { return }
+
+        let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
+
+        guard let idToken = gidSignInResult.user.idToken?.tokenString else {
+            throw URLError(.badServerResponse)
+        }
+
+        let accessToken = gidSignInResult.user.accessToken.tokenString
+        
+        Task{
+            let isGuidedAccessEnabled = UIAccessibility.isGuidedAccessEnabled
+            print("Is Guided Access enabled? \(isGuidedAccessEnabled)")
+        }
+
+        registrationManager.register(withGoogleIDToken: idToken, accessToken: accessToken) { success, error in
+            if let error = error {
+                completion(false, error.localizedDescription)
+            } else {
+                completion(success, nil)
+            }
+        }
+    }
+
+
 }
+
+
+
+
+

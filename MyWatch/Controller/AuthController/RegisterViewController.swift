@@ -14,23 +14,32 @@ class RegisterViewController: UIViewController {
     // MARK: - Properties
     
     lazy var viewModel: RegistrationViewModel = {
-        let model = RegistrationModel()
-        return RegistrationViewModel(model: model)
+        let model = User()
+        let registrationManager = RegistrationManager()
+        return RegistrationViewModel(model: model, registrationManager: registrationManager)
     }()
+
     
-    var registrationView: RegistrationView!
+    lazy var registrationView: RegistrationView = {
+        let view = RegistrationView(viewModel: viewModel)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
 
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Initialize registration view with view model
         registrationView = RegistrationView(viewModel: viewModel)
-
-        registrationView.translatesAutoresizingMaskIntoConstraints = false // disable autoresizing masks
         
-        
+        // Add registration view to the view hierarchy
         view.addSubview(registrationView)
+        registrationView.translatesAutoresizingMaskIntoConstraints = false
         
+        // Add constraints
         NSLayoutConstraint.activate([
             registrationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             registrationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),

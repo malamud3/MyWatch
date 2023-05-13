@@ -8,13 +8,19 @@
 
 import UIKit
 import RxSwift
+import SwiftUI
 
 class MainTabBarViewController: UITabBarController {
     
     let showMoviesSubject = PublishSubject<Bool>()
     var showMovies : Bool = true
+    
     let selectedGenreSubject = PublishSubject<Int16>()
     var selectedGenre: Int16 = 0 // default to no genre selected
+    
+    let isNavBarTranslucentSubject = BehaviorSubject<Bool>(value: false)
+    var isNavBarTranslucent: Bool = false
+    
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -59,6 +65,14 @@ class MainTabBarViewController: UITabBarController {
                         self?.selectedGenre = genre
                     })
                     .disposed(by: disposeBag)
+        
+        isNavBarTranslucentSubject
+                   .subscribe(onNext: { [weak self] isTranslucent in
+                       guard let self = self else { return }
+                       self.isNavBarTranslucent = isTranslucent
+                       self.updateNavigationBarTranslucency(isTranslucent)
+                   })
+                   .disposed(by: disposeBag)
         
     }
     // NAV -> Porfile, LOGO-> FirstPage
@@ -110,11 +124,15 @@ class MainTabBarViewController: UITabBarController {
             checkBoxBtn
         ]
         
-        UINavigationBar.appearance().isTranslucent = false
+//        UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = .systemBackground
 
     }
     
+    private func updateNavigationBarTranslucency(_ isTranslucent: Bool) {
+           UINavigationBar.appearance().isTranslucent = isTranslucent
+           UINavigationBar.appearance().barTintColor = isTranslucent ? nil : .systemBackground
+       }
     
     @objc private func showMoviesAction() {
         showMovies = true
@@ -127,8 +145,12 @@ class MainTabBarViewController: UITabBarController {
     }
     
     @objc private func handleLogin() {
+//MARK: phoneAuth
         let regVC = RegisterViewController()
         navigationController?.pushViewController(regVC, animated: true)
+////MARK: UIKit- email-pass base
+//        let swiftUIViewController = UIHostingController(rootView: SignInView())
+//        self.navigationController?.pushViewController(swiftUIViewController, animated: true)
     }
     
     @objc private func showCheckBoxView() {

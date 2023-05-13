@@ -35,26 +35,35 @@ class SearchViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = S.title.search
-        view.backgroundColor = .systemBackground;
-        
+        view.backgroundColor = .systemBackground
+
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
-        
-        view.addSubview(discoverTable)
+
         discoverTable.delegate = self
         discoverTable.dataSource = self
-        
+        view.addSubview(discoverTable)
         
         navigationItem.searchController = searchController
         
+        // Set the search bar to occupy the entire navigation bar.
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
         
-        fetchData ()
-        
+        // Set the search bar to be full screen by setting the search controller's `searchBar` frame to the view's bounds.
+        searchController.searchBar.frame = view.bounds
+        searchController.searchBar.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         searchController.searchResultsUpdater = self
         
+        fetchData()
+
+        modifyUIMovieOrTvShow()
         
-        modifyUIMovieOrTvShow ()
+        if let tabBarVC = tabBarController as? MainTabBarViewController {
+            tabBarVC.isNavBarTranslucentSubject.onNext(true)
+        }
     }
+
     
     // Update the view based on the new value of showMovies
     private func modifyUIMovieOrTvShow (){

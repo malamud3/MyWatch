@@ -52,7 +52,14 @@ class HomeViewController: UIViewController {
         tableView.tableHeaderView = headerView
         
         modifyUI()
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isTranslucent = true
+    }
+
     
     // Update the view based on the new value of showMovies
     private func modifyUI (){
@@ -87,6 +94,10 @@ class HomeViewController: UIViewController {
                 self?.updateUI()
             })
             .disposed(by: disposeBag)
+        
+        if let tabBarVC = tabBarController as? MainTabBarViewController {
+            tabBarVC.isNavBarTranslucentSubject.onNext(true)
+        }
 
     }
     
