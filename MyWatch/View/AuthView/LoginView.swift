@@ -1,148 +1,188 @@
-////
-////  LoginView.swift
-////  MyWatch
-////
-////  Created by Amir Malamud on 01/04/2023.
-////
-//import UIKit
-//
-//class LoginView: UIView {
-//    // MARK: - UI Elements
-//    
-//    private let phoneNumberTextField: UITextField = {
-//        let textField = UITextField()
-//        textField.placeholder = "Phone Number"
-//        textField.keyboardType = .phonePad
-//        textField.borderStyle = .roundedRect
-//        return textField
-//    }()
-//    
-//    private let loginButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("Login", for: .normal)
-//        button.backgroundColor = .systemBlue
-//        button.layer.cornerRadius = 8
-//        return button
-//    }()
-//    
-//    private let appleButton: UIButton = {
-//        let button = UIButton()
-//        button.setImage(UIImage(named: "apple_icon"), for: .normal)
-//        button.backgroundColor = .clear
-//        button.layer.cornerRadius = 8
-//        return button
-//    }()
-//    
-//    private let googleButton: UIButton = {
-//        let button = UIButton()
-//        button.setImage(UIImage(named: "google_icon"), for: .normal)
-//        button.backgroundColor = .clear
-//        button.layer.cornerRadius = 8
-//        return button
-//    }()
-//    
-//    // MARK: - Properties
-//    
-//    var loginButtonAction: ((String) -> Void)?
-//    var appleButtonAction: (() -> Void)?
-//    var googleButtonAction: (() -> Void)?
-//    
-//    // MARK: - Initializers
-//    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        
-//        setupUI()
-//        setupActions()
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
-//    // MARK: - UI Setup
-//    
-//    private func setupUI() {
-//        backgroundColor = .white
-//        
-//        addSubview(phoneNumberTextField)
-//        addSubview(loginButton)
-//        addSubview(appleButton)
-//        addSubview(googleButton)
-//        
-//        phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            phoneNumberTextField.topAnchor.constraint(equalTo: topAnchor, constant: 32),
-//            phoneNumberTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-//            phoneNumberTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-//            phoneNumberTextField.heightAnchor.constraint(equalToConstant: 44)
-//        ])
-//        
-//        loginButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            loginButton.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 32),
-//            loginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-//            loginButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-//            loginButton.heightAnchor.constraint(equalToConstant: 44)
-//        ])
-//        
-//        appleButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            appleButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
-//            appleButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-//            appleButton.widthAnchor.constraint(equalToConstant: 44),
-//            appleButton.heightAnchor.constraint(equalToConstant: 44)
-//        ])
-//        
-//        googleButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            googleButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
-//            googleButton.leadingAnchor.constraint(equalTo: appleButton.trailingAnchor, constant: 16),
-//            googleButton.widthAnchor.constraint(equalToConstant: 44),
-//            googleButton.heightAnchor.constraint(equalToConstant: 44)
-//        ])
-//    }
-//    
-//    // MARK: - Actions
-//
-//    private func setupActions() {
-//        loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
-//        appleButton.addTarget(self, action: #selector(didTapAppleButton), for: .touchUpInside)
-//        googleButton.addTarget(self, action: #selector(didTapGoogleButton), for: .touchUpInside)
-//    }
-//}
-//extension LoginView {
-//    @objc private func didTapAppleButton() {
-//        appleButtonAction?()
-//    }
-//
-//    @objc private func didTapGoogleButton() {
-//        googleButtonAction?()
-//    }
-//    @objc private func didTapLoginButton() {
-//        guard let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else {
-//            return
-//        }
-//        
-//        let alert = UIAlertController(title: "Login", message: "Choose your login provider", preferredStyle: .actionSheet)
-//        
-//        let appleAction = UIAlertAction(title: "Apple", style: .default) { [weak self] _ in
-//            self?.loginButtonAction?("Apple: " + phoneNumber)
-//        }
-//        alert.addAction(appleAction)
-//        
-//        let googleAction = UIAlertAction(title: "Google", style: .default) { [weak self] _ in
-//            self?.loginButtonAction?("Google: " + phoneNumber)
-//        }
-//        alert.addAction(googleAction)
-//        
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//        alert.addAction(cancelAction)
-//        
-//        if let viewController = self.parentViewController {
-//            viewController.present(alert, animated: true, completion: nil)
-//        }
-//        
-//    }
-//}
-//
+import UIKit
+import MaterialComponents
+import AuthenticationServices
+import FirebaseCore
+import FirebaseAuth
+import GoogleSignIn
+
+class LoginView: UIView {
+    
+    // MARK: - Properties
+    
+    let viewModel: LoginViewModel
+    
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.text = "Sign In"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var phoneNumberTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Phone Number"
+        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    lazy var loginButton: MDCButton = {
+        let button = MDCButton()
+        button.setTitle("Login", for: .normal)
+        button.setTitleFont(UIFont.systemFont(ofSize: 30, weight: .medium), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.setElevation(ShadowElevation(rawValue: 4), for: .normal)
+        button.setBackgroundColor(UIColor.blue, for: .normal) // Example button background color
+        button.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var googleLoginButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitle("Login with Google", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = UIColor.red // Example button background color
+        button.addTarget(self, action: #selector(didTapGoogleLoginButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
+        let button = ASAuthorizationAppleIDButton(type: .default, style: .black)
+        button.addTarget(self, action: #selector(didTapAppleLoginButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    // MARK: - Initialization
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
+        configureSubviews()
+        configureConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Subviews
+    
+    private func configureSubviews() {
+        addSubview(titleLabel)
+        addSubview(phoneNumberTextField)
+        addSubview(loginButton)
+        addSubview(googleLoginButton)
+        addSubview(appleLoginButton)
+    }
+    
+    private func configureConstraints() {
+        // titleLabel
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+        ])
+        
+        // phoneNumberTextField
+        NSLayoutConstraint.activate([
+            phoneNumberTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            phoneNumberTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            phoneNumberTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            phoneNumberTextField.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        // loginButton
+        NSLayoutConstraint.activate([
+            loginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            loginButton.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 20),
+            loginButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 48),
+            loginButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 48)
+        ])
+        
+        // googleLoginButton
+        NSLayoutConstraint.activate([
+            googleLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            googleLoginButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
+            googleLoginButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 48),
+            googleLoginButton.heightAnchor.constraint(equalToConstant: 48)
+        ])
+        
+        // appleLoginButton
+        NSLayoutConstraint.activate([
+            appleLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            appleLoginButton.topAnchor.constraint(equalTo: googleLoginButton.bottomAnchor, constant: 20),
+            appleLoginButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 48),
+            appleLoginButton.heightAnchor.constraint(equalToConstant: 48)
+        ])
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func didTapLoginButton() async {
+        // Perform the login action
+        
+        // Get the phone number from the text field
+        guard let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else {
+            // Show an error message if the phone number is empty
+            print("Please enter a valid phone number.")
+            return
+        }
+        
+        // Set the phone number in the view model
+        viewModel.model.phoneNumber = phoneNumber
+        
+        do {
+            let result: () = try await viewModel.login(with: .phone) { success, error in
+                if success {
+                    // Login successful
+                    // You can handle the successful login action here
+                    print("Login successful")
+                } else if let error = error {
+                    // Login failed
+                    // You can handle the login failure and show an error message to the user
+                    print("Login failed: \(error)")
+                }
+            }
+            
+            // Handle the result if necessary
+            // ...
+            
+        } catch {
+            // Handle any other errors that occur during the login process
+            print("Error: \(error)")
+        }
+    }
+    
+    @objc private func didTapGoogleLoginButton() async {
+        // Handle Google login button tap
+        do {
+            let result: () = try await viewModel.login(with: .google) { success, error in
+                if success {
+                    // Login successful
+                    // You can handle the successful login action here
+                    print("Google login successful")
+                } else if let error = error {
+                    // Login failed
+                    // You can handle the login failure and show an error message to the user
+                    print("Google login failed: \(error)")
+                }
+            }
+            
+            // Handle the result if necessary
+            // ...
+            
+        } catch {
+            // Handle any other errors that occur during the login process
+            print("Error: \(error)")
+        }
+    }
+    
+    @objc private func didTapAppleLoginButton() {
+        // Handle Apple login button tap
+        // You can implement the Apple login flow here
+    }
+}

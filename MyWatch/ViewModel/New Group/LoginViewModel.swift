@@ -1,106 +1,102 @@
-////
-////  LoginViewModel.swift
-////  GameStore_UIkit
-////
-////  Created by Amir Malamud on 02/02/2023.
-////
-//import Foundation
-//import FirebaseAuth
-//import GoogleSignIn
-//
-//enum LoginMethod {
-//    case phone
-//    case apple
-//    case google
-//}
-//
-//class LoginViewModel {
-//
-//    // MARK: - Properties
-//
-//    private var model: LoginModel
-//    private let loginManager: LoginManager
-//
-//    // MARK: - Initializer
-//
-//    init(model: LoginModel, loginManager: LoginManager) {
-//          self.model = model
-//          self.loginManager = loginManager
-//      }
-//
-//    // MARK: - Public methods
-//
-//    func login(with method: LoginMethod, completion: @escaping (Bool, Error?) -> Void) {
-//        switch method {
-//        case .phone:
-//            loginWithPhoneNumber(completion: completion)
-//        case .apple:
-//            loginWithApple(completion: completion)
-//        case .google:
-//            loginWithGoogle(completion: completion)
-//        }
-//    }
-//
-//    // MARK: - Private methods
-//
-//    private func loginWithPhoneNumber(completion: @escaping (Bool, Error?) -> Void) {
-//        guard let verificationCode = model.verificationCode else {
-//            let error = NSError(domain: "LoginViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Verification code missing"])
-//            completion(false, error)
-//            return
-//        }
-//        let loginManager = LoginManager()
-//        loginManager.login(withPhoneNumber: model.phoneNumber, verificationCode: verificationCode) { success, error in
-//            completion(success, error)
-//        }
-//    }
-//
-//    private func loginWithApple(completion: @escaping (Bool, Error?) -> Void) {
-//        guard let appleCredential = model.appleCredential, let identityTokenData = model.appleIdentityToken else {
-//            let error = NSError(domain: "LoginViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Apple ID credential or identity token missing"])
-//            completion(false, error)
-//            return
-//        }
-//
-//        guard let identityTokenString = String(data: identityTokenData, encoding: .utf8) else {
-//            let error = NSError(domain: "LoginViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Apple ID identity token cannot be converted to string"])
-//            completion(false, error)
-//            return
-//        }
-//
-//        let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: identityTokenString, rawNonce: model.appleNonce)
-//        self.model.appleCredential = credential
-//
-//        Auth.auth().signIn(with: credential) { (result, error) in
-//            if let error = error {
-//                completion(false, error)
-//                return
-//            }
-//            completion(true, nil)
-//        }
-//    }
-//
-//
-//
-//
-//
-//
-//    private func loginWithGoogle(completion: @escaping (Bool, Error?) -> Void) {
-//        guard let idToken = model.googleIDToken, let accessToken = model.googleAccessToken else {
-//            let error = NSError(domain: "LoginViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Google ID token or access token missing"])
-//            completion(false, error)
-//            return
-//        }
-//
-//        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-//        self.model.googleCredential = credential
-//
-//        let loginManager = LoginManager()
-//        loginManager.login(withGoogleIDToken: idToken, accessToken: accessToken) { success, error in
-//            completion(success, error)
-//        }
-//    }
-//
-//}
-//
-//
+import AuthenticationServices
+import FirebaseCore
+import FirebaseAuth
+import GoogleSignIn
+
+class LoginViewModel {
+    
+    // MARK: - Properties
+    
+    let loginManager: LoginManager
+    var model: User
+    
+    // MARK: - Initialization
+    
+    init(model: User, loginManager: LoginManager) {
+        self.model = model
+        self.loginManager = loginManager
+    }
+    
+    // MARK: - Actions
+    
+    func login(with method: AuthMethod, completion: @escaping (Bool, String?) -> Void) async throws {
+        switch method {
+        case .phone:
+            try await loginWithPhoneNumber(completion: completion)
+        case .apple:
+            // loginWithAppleID(completion: completion)
+            break
+        case .google:
+            try await loginWithGoogle(completion: completion)
+        case .sms:
+            try await verifyPhoneNumber(completion: completion)
+        }
+    }
+    
+    func loginWithPhoneNumber(completion: @escaping (Bool, String?) -> Void) async throws {
+        guard let phoneNumber = model.phoneNumber, !phoneNumber.isEmpty else
+             {
+            completion(false, "Please enter valid phone number and verification code.")
+            return
+        }
+        
+         loginManager.login(withPhoneNumber: phoneNumber) { result in
+            switch result {
+            case .success(let verificationID):
+                completion(true, verificationID)
+            case .failure(let error):
+                completion(false, error.localizedDescription)
+            }
+        }
+    }
+    
+    func verifyPhoneNumber(completion: @escaping (Bool, String?) -> Void) async throws{
+        
+        guard let verificationCode = loginManager.verificationCode else {
+            completion(false, "Please enter a valid phone number.") 
+            return
+        }
+        loginManager.verifyPhoneNumber(verificationCode: verificationCode) { result in
+            switch result {
+            case .success:
+                completion(true, nil)
+            case .failure(let error):
+                completion(false, error.localizedDescription)
+            }
+        }
+    }
+
+    func loginWithGoogle(completion: @escaping (Bool, String?) -> Void) async throws {
+        // Configure Google Sign-In
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+        
+        let scenes = await UIApplication.shared.connectedScenes
+        let windowScenes = scenes.first as? UIWindowScene
+        let window = await windowScenes?.windows.first
+        guard let rootViewController = await window?.rootViewController else { return }
+
+        let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
+
+        guard let idToken = gidSignInResult.user.idToken?.tokenString else {
+            throw URLError(.badServerResponse)
+        }
+
+        let accessToken = gidSignInResult.user.accessToken.tokenString
+        
+        Task {
+            let isGuidedAccessEnabled = UIAccessibility.isGuidedAccessEnabled
+            print("Is Guided Access enabled? \(isGuidedAccessEnabled)")
+        }
+        
+        try await loginManager.login(withGoogleIDToken: idToken, accessToken: accessToken) { result in
+            switch result {
+            case .success:
+                completion(true, nil)
+            case .failure(let error):
+                completion(false, error.localizedDescription)
+            }
+        }
+    }
+}

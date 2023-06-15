@@ -19,8 +19,6 @@ class RegistrationManager {
 
     var googleCredential: AuthCredential?
     
-    typealias AuthResult = Result<AuthDataResult, Error>
-    typealias AuthCompletion = (_ result: AuthResult) -> Void
     private var currentNonce: String?
 
     // MARK: - Phone Registration

@@ -80,14 +80,14 @@ extension CollectionTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         collectionView.deselectItem(at: indexPath, animated: true)
         guard collectionView == self.collectionView else { return }
         let theShow = shows[indexPath.row]
-        guard let showName = theShow.original_title ?? theShow.original_name else { return }
+        guard let showName = theShow.original_title ?? theShow.title else { return }
         collectionView.isUserInteractionEnabled = false
         DispatchQueue.global().async {
             APICaller_Youtube.shared.getTrailer(for: showName + " trailer") { (videoURL) in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
                     {
                     if let videoURL = videoURL {
-                        let videoElement = VideoElement(id: idVideoElement(kind: "", videoId: videoURL))
+                        let videoElement = Video_Element(id: id_Video_Element(kind: "", videoId: videoURL))
                         let viewModel = ShowTrailerViewModel(show: showName, youtubeView: videoElement, showOverview: theShow.overview!)
                         self.deleagte?.CollectionViewTableViewCellDidTapCell(self, viewModel: viewModel)
                     }

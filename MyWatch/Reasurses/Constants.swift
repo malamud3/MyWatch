@@ -17,10 +17,6 @@ struct S{
         */
         
         static let TV_genres: [Int16: String] = [
-        /*
-        https://api.themoviedb.org/3/genre/tv/list?api_key=606d075a4fbbc18c603c1dbf8c440945&language=en-US
-        */
-
             10759    :  "Action & Adventure",
             16       :  "Animation",
             35       :  "Comedy",

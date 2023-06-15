@@ -17,6 +17,8 @@ class SearchViewController: UIViewController  {
     private var showMovies  = true
     private let disposeBag = DisposeBag()
     
+    private let myPage = 1
+
     private let discoverTable: UITableView = {
         let table = UITableView()
         table.register(ShowTableViewCell.self, forCellReuseIdentifier: S.Identifier.ShowTableViewCell)
@@ -55,7 +57,7 @@ class SearchViewController: UIViewController  {
         searchController.searchBar.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         searchController.searchResultsUpdater = self
         
-        fetchData()
+        fetchInitData()
 
         modifyUIMovieOrTvShow()
         
@@ -81,8 +83,9 @@ class SearchViewController: UIViewController  {
                 case .some(_):
                     break
                 }
-                self?.fetchData()
+                self?.fetchInitData()
             })
+        
             .disposed(by: disposeBag)
     }
     
@@ -91,7 +94,7 @@ class SearchViewController: UIViewController  {
         discoverTable.frame = view.bounds
     }
     
-    private func fetchData () {
+    private func fetchInitData () {
         apiCaller.getPopular(dataPage: 1, Ganerfilter: -1) { [weak self] result in
             switch result {
             case .success(let shows):
@@ -120,7 +123,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         let theShow = shows[indexPath.row]
         
-        let model = showViewModel(showName: theShow.original_title ?? theShow.original_name ?? "Unknown", posterURL: theShow.poster_path ?? "",dateRelece: "")
+        let model = showViewModel(showName: theShow.original_title ?? theShow.title ?? "Unknown", posterURL: theShow.poster_path ?? "",dateRelece: "")
         cell.configure(with: model)
         
         return cell
@@ -147,7 +150,7 @@ extension SearchViewController: UISearchResultsUpdating, SearchResultsViewContro
         resultsController.delegate = self
         
         
-        APICaller_Movie.shared.doSearch(with: query) {  result in
+        APICaller_Movie.shared.doSearch(dataPage: myPage, with: query) {  result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let shows):

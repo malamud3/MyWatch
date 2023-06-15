@@ -29,13 +29,15 @@
 		A925CCA6298D044D001213BE /* ShowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CC9B298D044A001213BE /* ShowCollectionViewCell.swift */; };
 		A925CCA7298D044D001213BE /* ShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CC9C298D044A001213BE /* ShowTableViewCell.swift */; };
 		A925CCA8298D044D001213BE /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CC9E298D044B001213BE /* Show.swift */; };
-		A925CCA9298D044D001213BE /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CC9F298D044B001213BE /* YoutubeSearchResponse.swift */; };
+		A925CCA9298D044D001213BE /* Youtube_Search_Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CC9F298D044B001213BE /* Youtube_Search_Response.swift */; };
 		A925CCAA298D044D001213BE /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CCA1298D044C001213BE /* LoginViewModel.swift */; };
 		A925CCAB298D044D001213BE /* ShowTrailerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CCA2298D044C001213BE /* ShowTrailerViewModel.swift */; };
 		A925CCAC298D044D001213BE /* showViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CCA3298D044C001213BE /* showViewModel.swift */; };
 		A925CCB1298D047E001213BE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CCAF298D047E001213BE /* Constants.swift */; };
 		A925CCB2298D047E001213BE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925CCB0298D047E001213BE /* Extensions.swift */; };
 		A92E4D3E298D2B8B00F57FD1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A92E4D3D298D2B8B00F57FD1 /* GoogleService-Info.plist */; };
+		A93D4CF92A37296800AF21D8 /* APICaller_TVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93D4CF82A37296800AF21D8 /* APICaller_TVTests.swift */; };
+		A93D4CFB2A3B2DA200AF21D8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93D4CFA2A3B2DA200AF21D8 /* LoginViewController.swift */; };
 		A94D9F39299A3BFE00B40820 /* GenresListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D9F38299A3BFE00B40820 /* GenresListViewController.swift */; };
 		A95C6CE229910C3200A0A4E9 /* APICaller_Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95C6CE129910C3200A0A4E9 /* APICaller_Show.swift */; };
 		A95C6CE429910C5100A0A4E9 /* APICaller_Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95C6CE329910C5100A0A4E9 /* APICaller_Movie.swift */; };
@@ -114,13 +116,15 @@
 		A925CC9B298D044A001213BE /* ShowCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowCollectionViewCell.swift; sourceTree = "<group>"; };
 		A925CC9C298D044A001213BE /* ShowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTableViewCell.swift; sourceTree = "<group>"; };
 		A925CC9E298D044B001213BE /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
-		A925CC9F298D044B001213BE /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
+		A925CC9F298D044B001213BE /* Youtube_Search_Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Youtube_Search_Response.swift; sourceTree = "<group>"; };
 		A925CCA1298D044C001213BE /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = "../New Group/LoginViewModel.swift"; sourceTree = "<group>"; };
 		A925CCA2298D044C001213BE /* ShowTrailerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTrailerViewModel.swift; sourceTree = "<group>"; };
 		A925CCA3298D044C001213BE /* showViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = showViewModel.swift; sourceTree = "<group>"; };
 		A925CCAF298D047E001213BE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A925CCB0298D047E001213BE /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A92E4D3D298D2B8B00F57FD1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A93D4CF82A37296800AF21D8 /* APICaller_TVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller_TVTests.swift; sourceTree = "<group>"; };
+		A93D4CFA2A3B2DA200AF21D8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A94D9F38299A3BFE00B40820 /* GenresListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresListViewController.swift; sourceTree = "<group>"; };
 		A95C6CE129910C3200A0A4E9 /* APICaller_Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller_Show.swift; sourceTree = "<group>"; };
 		A95C6CE329910C5100A0A4E9 /* APICaller_Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller_Movie.swift; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 		A925CC64298C3566001213BE /* MyWatchTests */ = {
 			isa = PBXGroup;
 			children = (
+				A93D4CF82A37296800AF21D8 /* APICaller_TVTests.swift */,
 				A925CC65298C3566001213BE /* MyWatchTests.swift */,
 			);
 			path = MyWatchTests;
@@ -316,7 +321,7 @@
 			children = (
 				A962F6C129D8312C0054337C /* AuthModel */,
 				A925CC9E298D044B001213BE /* Show.swift */,
-				A925CC9F298D044B001213BE /* YoutubeSearchResponse.swift */,
+				A925CC9F298D044B001213BE /* Youtube_Search_Response.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -374,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				A962F6C729D8329B0054337C /* RegisterViewController.swift */,
+				A93D4CFA2A3B2DA200AF21D8 /* LoginViewController.swift */,
 			);
 			path = AuthController;
 			sourceTree = "<group>";
@@ -665,7 +671,7 @@
 				A925CCA4298D044D001213BE /* HeaderUiView.swift in Sources */,
 				A925CC51298C3564001213BE /* SceneDelegate.swift in Sources */,
 				A925CC95298D0420001213BE /* MainTabBarViewController.swift in Sources */,
-				A925CCA9298D044D001213BE /* YoutubeSearchResponse.swift in Sources */,
+				A925CCA9298D044D001213BE /* Youtube_Search_Response.swift in Sources */,
 				A925CCAB298D044D001213BE /* ShowTrailerViewModel.swift in Sources */,
 				A962F6C829D8329B0054337C /* RegisterViewController.swift in Sources */,
 				A925CC96298D0420001213BE /* showTrailerViewController.swift in Sources */,
@@ -673,6 +679,7 @@
 				A962F6CF29D83E600054337C /* RegistrationManager.swift in Sources */,
 				A925CCAC298D044D001213BE /* showViewModel.swift in Sources */,
 				A962F6C329D831480054337C /* User.swift in Sources */,
+				A93D4CFB2A3B2DA200AF21D8 /* LoginViewController.swift in Sources */,
 				A9A07439298D1D08004799FD /* RegisterViewModel.swift in Sources */,
 				A925CC90298D0420001213BE /* MyListViewController.swift in Sources */,
 				A962F6D129D83E820054337C /* LoginManager.swift in Sources */,
@@ -687,6 +694,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A925CC66298C3566001213BE /* MyWatchTests.swift in Sources */,
+				A93D4CF92A37296800AF21D8 /* APICaller_TVTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

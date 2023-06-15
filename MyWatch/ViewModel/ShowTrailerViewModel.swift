@@ -11,6 +11,6 @@ import Foundation
 struct ShowTrailerViewModel {
     
     let show: String
-    let youtubeView: VideoElement
+    let youtubeView: Video_Element
     let showOverview: String
 }

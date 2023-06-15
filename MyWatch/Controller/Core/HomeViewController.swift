@@ -118,7 +118,7 @@ class HomeViewController: UIViewController {
                 }
                 if let selectedShow = filteredShows.randomElement() {
                     self?.headerData = selectedShow
-                    self?.headerView?.configure(with: showViewModel(showName: selectedShow.original_title ?? selectedShow.original_name ?? "" , posterURL: selectedShow.poster_path ?? "", dateRelece: ""))
+                    self?.headerView?.configure(with: showViewModel(showName: selectedShow.original_title ?? selectedShow.title ?? "" , posterURL: selectedShow.poster_path ?? "", dateRelece: ""))
                 } else {
                     // If no matching shows were found, increment the page number and try again
                     self?.configureHeaderView(with: selectedGenre, page: page + 1)

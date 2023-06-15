@@ -26,8 +26,15 @@ class APICaller_Movie: APICaller_Show{
         }
         
         guard let url = URL(string: urlString) else { return }
-        
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+      
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
+            print(url)
+            if let error = error {
+                print("URLSession error: \(error)")
+                completion(.failure(error))
+                return
+            }
+            
             guard let data = data, error == nil else {
                 completion(.failure(error ?? APIError.failledTogetData))
                 return
@@ -150,10 +157,10 @@ class APICaller_Movie: APICaller_Show{
         task.resume()
         }
     
-    func doSearch(with query: String, completion: @escaping (Result<[Show], Error>) -> Void) {
+    func doSearch(dataPage Mypage: Int, with query: String, completion: @escaping (Result<[Show], Error>) -> Void) {
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         
-        guard let url = URL(string: "\(S.API_TV.doSearchMovie)\(query)") else { return }
+        guard let url = URL(string: "\(S.API_TV.doSearchMovie)\(query)&page=\(Mypage)") else { return }
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
                 completion(.failure(APIError.failledTogetData))

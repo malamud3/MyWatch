@@ -8,8 +8,6 @@
 
 import UIKit
 import RxSwift
-import SwiftUI
-
 class MainTabBarViewController: UITabBarController {
     
     let showMoviesSubject = PublishSubject<Bool>()
@@ -124,7 +122,6 @@ class MainTabBarViewController: UITabBarController {
             checkBoxBtn
         ]
         
-//        UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = .systemBackground
 
     }
@@ -146,7 +143,7 @@ class MainTabBarViewController: UITabBarController {
     
     @objc private func handleLogin() {
 //MARK: phoneAuth
-        let regVC = RegisterViewController()
+        let regVC = LoginViewController()
         navigationController?.pushViewController(regVC, animated: true)
 ////MARK: UIKit- email-pass base
 //        let swiftUIViewController = UIHostingController(rootView: SignInView())

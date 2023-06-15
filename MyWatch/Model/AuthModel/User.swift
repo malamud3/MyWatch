@@ -11,8 +11,3 @@ struct User {
     var phoneNumber: String?
     var myMovies: Set<Show?>?
 }
-
-
-
-
-

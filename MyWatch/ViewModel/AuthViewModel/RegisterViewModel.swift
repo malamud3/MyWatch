@@ -17,8 +17,7 @@ class RegistrationViewModel {
     
     var model: User
     
-    typealias AuthResult = Result<AuthDataResult, Error>
-    typealias AuthCompletion = (_ result: AuthResult) -> Void
+
     
     // MARK: - Initialization
     

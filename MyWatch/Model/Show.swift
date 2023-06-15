@@ -13,7 +13,7 @@ import Foundation
 struct Show: Codable, Hashable {
     
     let id: Int
-    let original_name: String?
+    let title: String?
     let original_title: String?
     let poster_path: String?
     let overview: String?

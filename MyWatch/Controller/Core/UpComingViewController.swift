@@ -62,6 +62,7 @@ class UpComingViewController: UIViewController {
                 case .some(_):
                     break
                 }
+                self?.myPage = 1
                 self?.fetchData()
             })
             .disposed(by: disposeBag)
@@ -102,6 +103,7 @@ class UpComingViewController: UIViewController {
             }
             return show1Date < show2Date
         }
+        
         let filteredShows = sortedShows.filter { (show) -> Bool in
                guard let date = show.first_air_date,
                      let showDate = dateFormatter.date(from: date),

@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct YoutubeSearchResponse: Codable {
+struct Youtube_Search_Response: Codable {
     
-    let items: [VideoElement]
-    
-}
-
-struct VideoElement : Codable  {
-    
-    let id: idVideoElement
+    let items: [Video_Element]
     
 }
 
-struct idVideoElement: Codable {
+struct Video_Element : Codable  {
+    
+    let id: id_Video_Element
+    
+}
+
+struct id_Video_Element: Codable {
     
     let kind: String
     let videoId: String
