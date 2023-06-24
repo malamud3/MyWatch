@@ -1,2 +1,2 @@
 # MyWatch
-![Alt Text](img/Model.svg)
+![Alt Text](/Model.svg)
