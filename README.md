@@ -1,5 +1,5 @@
 # MyWatch
 
-![Alt Text](/Architectural_pattern.svg)
+![Alt Text](/architecturalPattern.svg)
 
 ![Alt Text](/Model.svg)
