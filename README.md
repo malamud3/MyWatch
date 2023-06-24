@@ -2,6 +2,29 @@
 
 MyWatch is a movie and TV show catalog app built using the MVVM (Model-View-ViewModel) architecture pattern with the addition of Controllers to handle the business logic and Managers to handle requests to third-party services used by the app. 
 
+### First Screen
+![Alt Text](/FirstScreen.png)
+
+### After User press: Tv Shows btn
+![Alt Text](/FirstScreenTV.png)
+
+### After User scroll down
+![Alt Text](/ScrollDown.png)
+
+### After User press: Category btn
+![Alt Text](/Category.png)
+
+
+### Search Screen
+![Alt Text](/Search.png)
+
+### Search A
+![Alt Text](/SearchA.png)
+
+### Search Spider Man
+![Alt Text](/SearchSpiderMan.png)
+
+
 ## Key Features
 
 * Browse movies and TV shows in different categories, including trending, popular, recently added, and top-rated.
@@ -46,5 +69,3 @@ The MyWatch app follows the MVVM (Model-View-ViewModel) architecture pattern. Th
 ## Main Architectue
 
 ![Alt Text](/architecturalPattern.svg)
-
-### Us
