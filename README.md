@@ -2,26 +2,49 @@
 
 MyWatch is a movie and TV show catalog app built using the MVVM (Model-View-ViewModel) architecture pattern with the addition of Controllers to handle the business logic and Managers to handle requests to third-party services used by the app. 
 
-### First Screen
-<img src="/FirstScreen.png" alt="First Screen" width="300">
-
-### After User press: Tv Shows btn
-<img src="/FirstScreenTV.png" alt="First Screen TV" width="300">
-
-### After User scroll down
-<img src="/ScrollDown.png" alt="Scroll Down" width="300">
-
-### After User press: Category btn
-<img src="/Category.png" alt="Category" width="300">
-
-### Search Screen
-<img src="/Search.png" alt="Search Screen" width="300">
-
-### Search A
-<img src="/SearchA.png" alt="Search A" width="300">
-
-### Search Spider Man
-<img src="/SearchSpiderMan.png" alt="Search Spider Man" width="300">
+<table>
+  <tr>
+    <td align="center">
+      <strong>First Screen</strong>
+      <br>
+      <img src="/FirstScreen.png" alt="First Screen" width="300">
+    </td>
+    <td align="center">
+      <strong>After User press: Tv Shows btn</strong>
+      <br>
+      <img src="/FirstScreenTV.png" alt="First Screen TV" width="300">
+    </td>
+    <td align="center">
+      <strong>After User scroll down</strong>
+      <br>
+      <img src="/ScrollDown.png" alt="Scroll Down" width="300">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>After User press: Category btn</strong>
+      <br>
+      <img src="/Category.png" alt="Category" width="300">
+    </td>
+    <td align="center">
+      <strong>Search Screen</strong>
+      <br>
+      <img src="/Search.png" alt="Search Screen" width="300">
+    </td>
+    <td align="center">
+      <strong>Search A</strong>
+      <br>
+      <img src="/SearchA.png" alt="Search A" width="300">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center">
+      <strong>Search Spider Man</strong>
+      <br>
+      <img src="/SearchSpiderMan.png" alt="Search Spider Man" width="300">
+    </td>
+  </tr>
+</table>
 
 
 ## Key Features
