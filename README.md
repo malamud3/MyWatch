@@ -1,6 +1,6 @@
 # MyWatch
 
-MyWatch is a movie and TV show catalog app built using the MVVM (Model-View-ViewModel) architecture pattern with the addition of Controllers to handle the business logic and Managers to handle requests to third-party services used by the app. 
+MyWatch is a movie and TV show catalog app built using the MVVM-C (Model-View-ViewModel-Controller) architecture pattern with the addition of Controllers to handle the business logic and Managers to handle requests to third-party services used by the app. The app utilizes Firebase for two-way connection via phone number and SMS verification. Additionally, users can register/login using their Google or Apple accounts for a seamless authentication experience. 
 
 <table>
   <tr>
@@ -41,13 +41,12 @@ MyWatch is a movie and TV show catalog app built using the MVVM (Model-View-View
 ## Key Features
 
 * Browse movies and TV shows in different categories, including trending, popular, recently added, and top-rated.
-* Access a "Coming Soon" section to get a sneak peek at upcoming releases.
+* Browse a "Coming Soon" section to get a sneak peek at upcoming releases.(
 * Utilize a search feature to find specific movies or TV shows based on user preferences.
 * Filter the displayed content by category, allowing users to quickly find content of interest.
-* Implements the RxSwift framework for reactive programming and asynchronous data handling.
 * Includes authentication functionality using Firebase, enabling users to create accounts and securely log in.
 * Provides the ability for users to save a list of their most loved movies for easy access and personalization.
-* Offers additional information on each show, such as a brief summary and access to trailers.
+* Offers additional information on each show, such as a brief summary and access to trailers via youtube.
   
 ## Installation
 To install the MyWatch app, follow these steps:
@@ -62,22 +61,23 @@ Build and run the app on an iOS device or simulator running a compatible version
 ## Dependencies
 The MyWatch app relies on the following dependencies:
 
-SDWebImage
-GoogleAPIClientForREST/YouTube
-GoogleSignIn
-GoogleSignInSwift
-FirebaseAnalytics
-FirebaseAuth
-FirebaseFirestore
-RxSwift
-RxCocoa
-SVGKit
-MaterialComponents
+* SDWebImage
+* GoogleAPIClientForREST/YouTube
+* GoogleSignIn
+* GoogleSignInSwift
+* FirebaseAnalytics
+* FirebaseAuth
+* FirebaseFirestore
+* RxSwift
+* RxCocoa
+* SVGKit
+* MaterialComponents
+
 Make sure to use the appropriate versions of these dependencies as specified in the Podfile.
 
 ## Architecture
 
-The MyWatch app follows the MVVM (Model-View-ViewModel) architecture pattern. The app's business logic is handled by controllers, while the data is managed by view models. This separation of concerns allows for better code organization and maintainability.
+The MyWatch app follows the MVVM-C (Model-View-ViewModel-Controller) architecture pattern. The app's business logic is handled by controllers, while the data is managed by view models. This separation of concerns allows for better code organization and maintainability.
 
 ## Main Architectue
 
