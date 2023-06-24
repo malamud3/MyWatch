@@ -34,10 +34,6 @@ MyWatch is a movie and TV show catalog app built using the MVVM (Model-View-View
       <p><strong>Search Spider Man</strong></p>
       <p><img src="/SearchSpiderMan.png" alt="Search Spider Man" width="300"></p>
     </td>
-    <td align="center">
-      <p><strong>Additional Image</strong></p>
-      <p><img src="/AdditionalImage.png" alt="Additional Image" width="300"></p>
-    </td>
   </tr>
 </table>
 
