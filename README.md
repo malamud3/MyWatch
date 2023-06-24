@@ -5,43 +5,38 @@ MyWatch is a movie and TV show catalog app built using the MVVM (Model-View-View
 <table>
   <tr>
     <td align="center">
-      <strong>First Screen</strong>
-      <br>
-      <img src="/FirstScreen.png" alt="First Screen" width="300">
+      <p><strong>First Screen</strong></p>
+      <p><img src="/FirstScreen.png" alt="First Screen" width="300"></p>
     </td>
     <td align="center">
-      <strong>After User press: Tv Shows btn</strong>
-      <br>
-      <img src="/FirstScreenTV.png" alt="First Screen TV" width="300">
+      <p><strong>After User press: Tv Shows btn</strong></p>
+      <p><img src="/FirstScreenTV.png" alt="First Screen TV" width="300"></p>
     </td>
     <td align="center">
-      <strong>After User scroll down</strong>
-      <br>
-      <img src="/ScrollDown.png" alt="Scroll Down" width="300">
+      <p><strong>After User scroll down</strong></p>
+      <p><img src="/ScrollDown.png" alt="Scroll Down" width="300"></p>
+    </td>
+    <td align="center">
+      <p><strong>After User press: Category btn</strong></p>
+      <p><img src="/Category.png" alt="Category" width="300"></p>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <strong>After User press: Category btn</strong>
-      <br>
-      <img src="/Category.png" alt="Category" width="300">
+      <p><strong>Search Screen</strong></p>
+      <p><img src="/Search.png" alt="Search Screen" width="300"></p>
     </td>
     <td align="center">
-      <strong>Search Screen</strong>
-      <br>
-      <img src="/Search.png" alt="Search Screen" width="300">
+      <p><strong>Search A</strong></p>
+      <p><img src="/SearchA.png" alt="Search A" width="300"></p>
     </td>
     <td align="center">
-      <strong>Search A</strong>
-      <br>
-      <img src="/SearchA.png" alt="Search A" width="300">
+      <p><strong>Search Spider Man</strong></p>
+      <p><img src="/SearchSpiderMan.png" alt="Search Spider Man" width="300"></p>
     </td>
-  </tr>
-  <tr>
-    <td colspan="3" align="center">
-      <strong>Search Spider Man</strong>
-      <br>
-      <img src="/SearchSpiderMan.png" alt="Search Spider Man" width="300">
+    <td align="center">
+      <p><strong>Additional Image</strong></p>
+      <p><img src="/AdditionalImage.png" alt="Additional Image" width="300"></p>
     </td>
   </tr>
 </table>
