@@ -1,6 +1,6 @@
 # MyWatch
 
-MyWatch is a movie and TV show catalog app built using the MVVM-C (Model-View-ViewModel-Controller) architecture pattern with the addition of Controllers to handle the business logic and Managers to handle requests to third-party services used by the app. The app utilizes Firebase for two-way connection via phone number and SMS verification. Additionally, users can register/login using their Google or Apple accounts for a seamless authentication experience. 
+MyWatch is a movie and TV show catalog app built using the MVVM  architecture pattern with the addition of Controllers to handle the business logic and Managers to handle requests to third-party services used by the app. The app utilizes Firebase for two-way connection via phone number and SMS verification. Additionally, users can register/login using their Google or Apple accounts for a seamless authentication experience. 
 
 <table>
   <tr>
